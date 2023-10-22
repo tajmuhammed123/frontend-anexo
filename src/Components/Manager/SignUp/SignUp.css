@@ -1,0 +1,13 @@
+@media (min-width: 650px) {
+    /* Adjust layout for larger screens */
+    .max-w-screen-lg {
+      max-width: 32rem;
+    }
+    .imagewidth{
+        width: 40%;
+    }
+    .main{
+        margin: 10px;
+    }
+  }
+

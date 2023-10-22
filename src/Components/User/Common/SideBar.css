@@ -1,0 +1,34 @@
+/* Home.css */
+.sidebar {
+  transition: all 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  width: 0;
+  overflow-x: hidden;
+}
+
+.sidebar .collapse-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 3rem;
+  background-color: white !important;
+  color: white;
+  border-top: 1px solid white;
+}
+
+.sidebar.open .collapse-button {
+  width: 3rem;
+}
+
+.sidebar.open {
+  transform: translateX(-100%);
+  background-color: white !important;
+  overflow-x: hidden;
+}
+.content {
+  z-index: 900;
+}

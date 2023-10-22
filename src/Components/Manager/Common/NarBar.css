@@ -1,0 +1,9 @@
+.Navbar{
+    width: 90rem;
+}
+.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 10; /* Adjust the z-index as needed */
+    background-color: white; /* Set the desired background color */
+  }
