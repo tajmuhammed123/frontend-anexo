@@ -1,21 +1,18 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { createContext, useContext, useEffect, useState } from "react";
 
-const ChatContext=createContext()
+const ChatContext = createContext();
 
-function ChatUserProvider({children}) {
-
-    const [selectedChat, setSelectedChat] = useState();
+function ChatUserProvider({ children }) {
+  const [selectedChat, setSelectedChat] = useState();
   const [user, setUser] = useState();
   const [notification, setNotification] = useState([]);
   const [chats, setChats] = useState([]);
   const initialChatState = {
-    _id: '', // Set an appropriate initial value for _id
-    chatName: '', // Set an appropriate initial value for chatName
-    users: [], // Set an appropriate initial value for users
-    createdAt: '', // Set an appropriate initial value for createdAt
-    updatedAt: '', // Set an appropriate initial value for updatedAt
-    // Add other properties as needed
+    _id: "",
+    chatName: "",
+    users: [],
+    createdAt: "",
+    updatedAt: "", 
   };
 
   useEffect(() => {
@@ -42,11 +39,11 @@ function ChatUserProvider({children}) {
     >
       {children}
     </ChatContext.Provider>
-  )
+  );
 }
 
-export const ChatState=()=>{
-    return useContext(ChatContext)
-}
+export const ChatState = () => {
+  return useContext(ChatContext);
+};
 
-export default ChatUserProvider
+export default ChatUserProvider;

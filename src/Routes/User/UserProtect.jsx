@@ -1,11 +1,11 @@
-import { Navigate } from "react-router-dom"
+import { Navigate } from "react-router-dom";
 
 function UserProtect(props) {
-  if(localStorage.getItem('userInfo')){
+  if (localStorage.getItem("userInfo")) {
     return props.children;
-  }else{
-    return <Navigate to='/login'/>
+  } else {
+    return <Navigate to="/login" />;
   }
 }
 
-export default UserProtect
+export default UserProtect;

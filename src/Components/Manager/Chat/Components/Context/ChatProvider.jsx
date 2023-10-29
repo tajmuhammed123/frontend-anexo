@@ -1,23 +1,22 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const ChatContext=createContext()
+const ChatContext = createContext();
 
-function ChatProvider({children}) {
-
-    const [selectedChat, setSelectedChat] = useState();
+function ChatProvider({ children }) {
+  const [selectedChat, setSelectedChat] = useState();
   const [user, setUser] = useState();
   const [notification, setNotification] = useState([]);
   const [chats, setChats] = useState([]);
   const initialChatState = {
-    _id: '', // Set an appropriate initial value for _id
-    chatName: '', // Set an appropriate initial value for chatName
+    _id: "", // Set an appropriate initial value for _id
+    chatName: "", // Set an appropriate initial value for chatName
     users: [], // Set an appropriate initial value for users
-    createdAt: '', // Set an appropriate initial value for createdAt
-    updatedAt: '', // Set an appropriate initial value for updatedAt
+    createdAt: "", // Set an appropriate initial value for createdAt
+    updatedAt: "", // Set an appropriate initial value for updatedAt
     // Add other properties as needed
   };
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
     const managerInfo = JSON.parse(localStorage.getItem("managerInfo"));
     console.log(managerInfo);
@@ -43,11 +42,11 @@ function ChatProvider({children}) {
     >
       {children}
     </ChatContext.Provider>
-  )
+  );
 }
 
-export const ChatState=()=>{
-    return useContext(ChatContext)
-}
+export const ChatState = () => {
+  return useContext(ChatContext);
+};
 
-export default ChatProvider
+export default ChatProvider;

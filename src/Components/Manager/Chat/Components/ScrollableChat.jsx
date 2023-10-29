@@ -1,12 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
 import { Avatar } from "@chakra-ui/avatar";
 import { Tooltip } from "@chakra-ui/tooltip";
 import { ChatState } from "./Context/ChatProvider";
-import {   
-    isLastMessage,
-    isSameSender,
-    isSameSenderMargin,
-    isSameUser, 
+import {
+  isLastMessage,
+  isSameSender,
+  isSameSenderMargin,
+  isSameUser,
 } from "../Config/ChatLogistics";
 
 const ScrollableChat = ({ messages }) => {
@@ -16,7 +16,8 @@ const ScrollableChat = ({ messages }) => {
   // Scroll to the bottom of the container when new messages arrive
   useEffect(() => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
   }, [messages]);
 
@@ -24,8 +25,8 @@ const ScrollableChat = ({ messages }) => {
     <div
       ref={chatContainerRef}
       style={{
-        maxHeight: '500px', // Set a maximum height for the scrollable container
-        overflowY: 'auto',
+        maxHeight: "500px", // Set a maximum height for the scrollable container
+        overflowY: "auto",
       }}
     >
       {messages &&
@@ -52,7 +53,7 @@ const ScrollableChat = ({ messages }) => {
                     size="2px"
                     cursor="pointer"
                     name={m.sender.name}
-                    src='https://www.clipartmax.com/png/small/54-546487_a-little-over-a-month-ago-i-had-lasik-surgery-user-profile.png'
+                    src="https://www.clipartmax.com/png/small/54-546487_a-little-over-a-month-ago-i-had-lasik-surgery-user-profile.png"
                   />
                 )}
               </Tooltip>

@@ -1,4 +1,4 @@
-import { Button } from '@chakra-ui/react'
+import { Button } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { Input } from "@chakra-ui/input";
 import { Box, Text } from "@chakra-ui/react";
@@ -10,14 +10,14 @@ import {
   MenuList,
 } from "@chakra-ui/menu";
 import {
-    Drawer,
-    DrawerBody,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerOverlay,
-    DrawerContent,
-    DrawerCloseButton,
-  } from '@chakra-ui/react'
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+} from "@chakra-ui/react";
 import { Tooltip } from "@chakra-ui/tooltip";
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import { Avatar } from "@chakra-ui/avatar";
@@ -33,8 +33,11 @@ import { Spinner } from "@chakra-ui/spinner";
 // import { getSender } from "../../config/ChatLogics";
 import { ChatState } from "../Context/ChatProvider";
 import UserList from "../Users/UserList";
-import { axiosManagerInstance, axiosUserInstance } from '../../../../../Constants/axios';
-import { toast } from 'react-toastify';
+import {
+  axiosManagerInstance,
+  axiosUserInstance,
+} from "../../../../../Constants/axios";
+import { toast } from "react-toastify";
 
 function SideDrawer() {
   const [search, setSearch] = useState("");
@@ -44,9 +47,9 @@ function SideDrawer() {
 
   const GenerateError = (err) => {
     toast.error(err, {
-      position: 'top-center',
-      theme: 'colored',
-      autoClose: 3000
+      position: "top-center",
+      theme: "colored",
+      autoClose: 3000,
     });
   };
 
@@ -65,10 +68,8 @@ function SideDrawer() {
 
   const logoutHandler = () => {
     localStorage.removeItem("userInfo");
-    navigate('/');
+    navigate("/");
   };
-
-  
 
   const handleSearch = async () => {
     if (!search) {
@@ -79,13 +80,18 @@ function SideDrawer() {
     try {
       setLoading(true);
 
+      const managerData = localStorage.getItem("managerInfo");
+      const managerInfo = JSON.parse(managerData);
       const config = {
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${managerInfo.token.token}`,
         },
       };
 
-      const { data } = await axiosManagerInstance.get(`/usersearch?search=${search}`, config);
+      const { data } = await axiosManagerInstance.get(
+        `/usersearch?search=${search}`,
+        config
+      );
 
       setLoading(false);
       setSearchResult(data);
@@ -105,15 +111,20 @@ function SideDrawer() {
           Authorization: `Bearer ${user.user.token}`,
         },
       };
-      const mangId=user.user._id
-      const { data } = await axiosUserInstance.post(`/accesschat`, { mangId,userId }, config);
+      const mangId = user.user._id;
+      const { data } = await axiosUserInstance.post(
+        `/accesschat`,
+        { mangId, userId },
+        config
+      );
       console.log(data);
 
       if (!chats.find((c) => c._id === data._id)) {
-        console.log('nothing');
-        setChats([data, ...chats])}
-      console.log(data,'data');
-      console.log(chats,'chat');
+        console.log("nothing");
+        setChats([data, ...chats]);
+      }
+      console.log(data, "data");
+      console.log(chats, "chat");
       setSelectedChat(data);
       setLoadingChat(false);
       onClose();
@@ -180,34 +191,34 @@ function SideDrawer() {
       </Box> */}
 
       <>
-      {/* Replace the following JSX with your desired HTML and React components */}
-      <div className='p-3'>
-        <label>
-          Search by name or email:
-          <input
-            type="text"
-            placeholder="Search by name or email"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </label>
-        <button onClick={handleSearch}>Go</button>
-      </div>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <ul>
-          {searchResult?.map((user) => (
-            <li key={user._id}>
-              <button onClick={() => accessChat(user._id)}>
-                {user.name}
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-      {loadingChat && <div>Loading chat...</div>}
-    </>
+        {/* Replace the following JSX with your desired HTML and React components */}
+        <div className="p-3">
+          <label>
+            Search by name or email:
+            <input
+              type="text"
+              placeholder="Search by name or email"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </label>
+          <button onClick={handleSearch}>Go</button>
+        </div>
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <ul>
+            {searchResult?.map((user) => (
+              <li key={user._id}>
+                <button onClick={() => accessChat(user._id)}>
+                  {user.name}
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+        {loadingChat && <div>Loading chat...</div>}
+      </>
     </>
   );
 }

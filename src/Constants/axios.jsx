@@ -4,13 +4,13 @@ import NotificationDialog from "./DialogueAlert";
 import { Navigate } from "react-router-dom";
 
 export const axiosUserInstance = axios.create({
-  baseURL: `http://localhost:4000`,
+  baseURL: import.meta.env.VITE_USER_ROUTE,
 });
 export const axiosAdminInstance = axios.create({
-  baseURL: `http://localhost:4000/admin`,
+  baseURL: import.meta.env.VITE_ADMIN_ROUTE,
 });
 export const axiosManagerInstance = axios.create({
-  baseURL: `http://localhost:4000/manager`,
+  baseURL: import.meta.env.VITE_MANAGER_ROUTE,
 });
 axiosAdminInstance.interceptors.response.use(
   (response) => {
@@ -21,7 +21,7 @@ axiosAdminInstance.interceptors.response.use(
     console.log("hj");
     if (error.response.data.message === "user expired") {
       localStorage.removeItem("adminInfo");
-      window.location.href = '/admin/login';
+      window.location.href = "/admin/login";
       NotificationDialog();
     }
     console.log(error.response.data.message);
@@ -30,18 +30,21 @@ axiosAdminInstance.interceptors.response.use(
 );
 axiosUserInstance.interceptors.response.use(
   (response) => {
-    if(response.data.message=='user blocked'){
+    if (response.data.message == "user blocked") {
       localStorage.removeItem("userInfo");
-      window.location.href = '/login';
+      window.location.href = "/login";
     }
     console.log(response, "fdgf");
     return response;
   },
   (error) => {
     console.log("hj");
-    if (error.response.data.message === "user expired"||error.response.data.message ==='user blocked') {
+    if (
+      error.response.data.message === "user expired" ||
+      error.response.data.message === "user blocked"
+    ) {
       localStorage.removeItem("userInfo");
-      window.location.href = '/login';
+      window.location.href = "/login";
       NotificationDialog();
     }
     console.log(error.response.data.message);
@@ -57,7 +60,7 @@ axiosManagerInstance.interceptors.response.use(
     console.log("hj");
     if (error.response.data.message === "user expired") {
       localStorage.removeItem("managerInfo");
-      window.location.href = '/manager/login';
+      window.location.href = "/manager/login";
       NotificationDialog();
     }
     console.log(error.response.data.message);

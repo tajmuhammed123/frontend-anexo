@@ -276,7 +276,7 @@ export const EventSubmit = async(eventdata)=>
   }
 }
 
-export const userPayment= async(id)=>{
+export const userPayment= async()=>{
   try {
     const userData=localStorage.getItem('userInfo')
     const userInfo=JSON.parse(userData)
@@ -286,7 +286,7 @@ export const userPayment= async(id)=>{
             Authorization: `Bearer ${userInfo.token.token}`,
           },
         };
-        const data  = await axiosUserInstance.post(
+        const data  = await axiosUserInstance.get(
           '/payment',
           config
         );
@@ -334,19 +334,19 @@ export const cancelOrder= async(id)=>{
       console.log(error.message);
   }
 }
-export const updateProfile= async(values)=>{
+export const updateProfile= async(id,name,mob)=>{
   try {
     console.log('njh');
-    console.log(values);
+    console.log(name);
     const userData=localStorage.getItem('userInfo')
     const userInfo=JSON.parse(userData)
     const config = {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${userInfo.token.token}`,
       },
     }
-      const data=await axiosUserInstance.post('/updateuserprofile',values,config)
+      const data=await axiosUserInstance.post('/updateuserprofile',{id,name,mob},config)
       console.log(data);
       return data
   } catch (error) {

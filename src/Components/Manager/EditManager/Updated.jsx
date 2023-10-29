@@ -9,7 +9,7 @@ import {
 } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { CheckIcon } from "@chakra-ui/icons";
- 
+
 export function Updated() {
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();

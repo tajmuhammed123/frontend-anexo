@@ -5,49 +5,52 @@ import {
   DialogHeader,
   DialogBody,
   DialogFooter,
-  Input,
   Textarea,
 } from "@material-tailwind/react";
 import { axiosUserInstance } from "../../../Constants/axios";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
- 
-export function ReportModal({id}) {
+
+export function ReportModal({ id }) {
   const [open, setOpen] = React.useState(false);
-  const [report, setReport] = useState('');
+  const [report, setReport] = useState("");
   const [send, setSend] = useState(false);
 
-  const handleReport=async(req,res)=>{
+  const handleReport = async () => {
     try {
-        const user = JSON.parse(localStorage.getItem('userInfo'))
-        console.log(user);
-        const userId=user.user._id
-        const managId=id
-        if(!report){
-          toast('Report Cannot Be Null')
-        }else{
-          const userData=localStorage.getItem('userInfo')
-          const userInfo=JSON.parse(userData)
-              const config = {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${userInfo.token.token}`,
-                },
-              };
-          const {data}=await axiosUserInstance.post('/submitreport',{report,managId,userId},config)
-          if(data.message){
-              toast(data.message)
-          }else if(data.status){
-              setSend(true)
-          }
+      const user = JSON.parse(localStorage.getItem("userInfo"));
+      console.log(user);
+      const userId = user.user._id;
+      const managId = id;
+      if (!report) {
+        toast("Report Cannot Be Null");
+      } else {
+        const userData = localStorage.getItem("userInfo");
+        const userInfo = JSON.parse(userData);
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userInfo.token.token}`,
+          },
+        };
+        const { data } = await axiosUserInstance.post(
+          "/submitreport",
+          { report, managId, userId },
+          config
+        );
+        if (data.message) {
+          toast(data.message);
+        } else if (data.status) {
+          setSend(true);
         }
+      }
     } catch (error) {
-        console.log(error.message);
+      console.log(error.message);
     }
-  }
- 
+  };
+
   const handleOpen = () => setOpen(!open);
- 
+
   return (
     <>
       <Button onClick={handleOpen}>Report</Button>
@@ -68,11 +71,18 @@ export function ReportModal({id}) {
             />
           </svg>
         </div>
-        {send?<p>Reported Successfully</p>:<DialogBody divider>
-          <div className="grid gap-6">
-            <Textarea label="Issue" onChange={(e)=>setReport(e.target.value)} />
-          </div>
-        </DialogBody>}
+        {send ? (
+          <p>Reported Successfully</p>
+        ) : (
+          <DialogBody divider>
+            <div className="grid gap-6">
+              <Textarea
+                label="Issue"
+                onChange={(e) => setReport(e.target.value)}
+              />
+            </div>
+          </DialogBody>
+        )}
         <DialogFooter className="space-x-2">
           <Button variant="outlined" color="red" onClick={handleOpen}>
             close
@@ -81,7 +91,7 @@ export function ReportModal({id}) {
             Submit
           </Button>
         </DialogFooter>
-        <ToastContainer/>
+        <ToastContainer />
       </Dialog>
     </>
   );

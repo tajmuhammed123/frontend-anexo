@@ -1,11 +1,11 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate } from "react-router-dom";
 
 function ManagerProtect(props) {
-    if(localStorage.getItem('managerInfo')){
-        return props.children;
-      }else{
-        return <Navigate to='/manager/login/'/>
-      }
+  if (localStorage.getItem("managerInfo")) {
+    return props.children;
+  } else {
+    return <Navigate to="/manager/login/" />;
+  }
 }
 
-export default ManagerProtect
+export default ManagerProtect;

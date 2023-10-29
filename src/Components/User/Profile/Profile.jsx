@@ -1,74 +1,102 @@
 import { EditIcon } from "@chakra-ui/icons";
 import {
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    Typography,
-    Tooltip,
-    Avatar,
-    Button,
-  } from "@material-tailwind/react";
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Typography,
+  Tooltip,
+  Avatar,
+  Button,
+  Badge,
+} from "@material-tailwind/react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-   
-  export function Profile() {
-    const userInfoString = localStorage.getItem("userInfo");
+import { axiosUserInstance } from "../../../Constants/axios";
+import { useQuery } from "@tanstack/react-query";
+import { EditImage } from "./EditImage";
+import EditUser from "./Edit";
 
-    const userInfo = JSON.parse(userInfoString)
-    console.log(userInfo);
-    const navigate=useNavigate()
-    return (
-        <>
-    <div className="flex mt-8 align-middle items-center h-screen flex-col">
+export function Profile() {
+  const [user, setUser] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const userData = localStorage.getItem("userInfo");
+  const userInfo = JSON.parse(userData);
+  const { isLoading, error } = useQuery(["userData"], async () => {
+    try {
+      const userData = localStorage.getItem("userInfo");
+      const userInfo = JSON.parse(userData);
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token.token}`,
+        },
+      };
+      axiosUserInstance
+        .get(`/userdata/${userInfo.user._id}`, config)
+        .then((res) => setUser(res.data.user));
+    } catch (err) {
+      console.error(err.message);
+      throw err;
+    }
+  });
+  const navigate = useNavigate();
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  return (
+    <>
+      <div className="flex mt-8 align-middle items-center h-screen flex-col">
         <div>
-    <Typography variant="h1" color="blue-gray" className="font-large">
-                  PROFILE
-    </Typography>
+          <Typography variant="h1" color="blue-gray" className="font-large">
+            PROFILE
+          </Typography>
         </div>
-      <Card className="my-6" style={{ width: '600px' }}>
-        <CardHeader
-          floated={false}
-          shadow={false}
-          color="transparent"
-          className="p-4 rounded-none"
-        >
-        <div>
-          <div className="flex justify-end">
-            <EditIcon onClick={()=>navigate(`/useredit/${userInfo.user._id}`)}/>
-          </div>
-          {userInfo.user.profile_img?<Avatar
-            size="lg"
-            variant="circular"
-            src={userInfo.user.profile_img}
-            alt="tania andrew"
-            className="mb-2"
-          />:<Avatar
-            size="lg"
-            variant="circular"
-            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-            alt="tania andrew"
-            className="mb-2"
-          />}
-        </div>
-        <div className="flex w-full flex-col gap-0.5">
-          
-          <div className="flex items-center justify-between">
-            <Typography variant="h4" color="blue-gray">
-              {userInfo.user.name}
-            </Typography>
-            <Typography variant="h5" color="blue-gray">
-              {userInfo.user.mob}
-            </Typography>
-            <div className="5 flex items-center gap-0">
-              <Typography variant="h5" className="p-3">${userInfo.user.wallet_amount}</Typography>
-              <Button>Withdraw</Button>
+        <Card className="my-6" style={{ width: "500px" }} color="gray">
+          <CardHeader
+            floated={false}
+            shadow={false}
+            color="transparent"
+            className="p-4 rounded-none"
+          >
+            <div className="flex justify-end">
+              <div className="bg-black hover:bg-white rounded-full p-2">
+                <EditUser user={user} className="hover:text-black text-white" />
+              </div>
             </div>
-          </div>
-          <Typography color="blue-gray">{userInfo.user.email}</Typography>
-        </div>
-        </CardHeader>
-        {/* <CardBody>
+            <div className="flex justify-center">
+              <EditImage id={userInfo.user._id} img={user.profile_img} />
+            </div>
+
+            <div className="flex w-full flex-col gap-0.5">
+              <div className="flex items-center justify-between flex-col">
+                <div className="w-full flex justify-center">
+                  <Typography variant="h2" className="py-3 text-white">
+                    {user.name}
+                  </Typography>
+                </div>
+                <div className="flex justify-between w-full">
+                  <Typography variant="h5" className="text-white">
+                    {user.mob}
+                  </Typography>
+                  <Typography className="text-white">{user.email}</Typography>
+                </div>
+                <div className="5 flex-col items-center gap-0 py-5">
+                  <Typography variant="h5" className="text-white">
+                    Wallet
+                  </Typography>
+                  <Typography variant="h5" className="text-white">
+                    ₹ {user.wallet_amount}
+                  </Typography>
+                  {/* <Button>Withdraw</Button> */}
+                </div>
+              </div>
+            </div>
+          </CardHeader>
+          {/* <CardBody>
           <Typography variant="h4" color="blue-gray">
             UI/UX Review Check
           </Typography>
@@ -100,8 +128,8 @@ import { useNavigate } from "react-router-dom";
           </div>
           <Typography className="font-normal">January 10</Typography>
         </CardFooter> */}
-      </Card>
+        </Card>
       </div>
-      </>
-    );
-  }
+    </>
+  );
+}

@@ -8,39 +8,46 @@ import { Button } from "@chakra-ui/react";
 import { axiosManagerInstance } from "../../../../Constants/axios";
 import { ChatState } from "./Context/ChatProvider";
 import { toast } from "react-toastify";
+import Spinner from "../../../../Spinner";
 
 const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
+  const [isLoading,setIsLoading]=useState(false)
 
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
 
   const GenerateError = (err) => {
     toast.error(err, {
-      position: 'top-center',
-      theme: 'colored',
-      autoClose: 3000
+      position: "top-center",
+      theme: "colored",
+      autoClose: 3000,
     });
   };
 
   const fetchChats = async () => {
     // console.log(user._id);
     try {
+      setIsLoading(true)
+      const managerData = localStorage.getItem("managerInfo");
+      const managerInfo = JSON.parse(managerData);
       const config = {
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${managerInfo.token.token}`,
         },
       };
       console.log(selectedChat);
-      const userId=user.user._id
-      const { data } = await axiosManagerInstance
-      .get(`/fetchchat/${userId}`, config);
+      const userId = user.user._id;
+      const { data } = await axiosManagerInstance.get(
+        `/fetchchat/${userId}`,
+        config
+      );
       console.log(data);
       setChats(data);
+      setIsLoading(false)
     } catch (error) {
       GenerateError("Error Occured!,Failed to Load the Messages");
     }
   };
-  
 
   useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("managerInfo")));
@@ -48,9 +55,13 @@ const MyChats = ({ fetchAgain }) => {
     // eslint-disable-next-line
   }, [fetchAgain]);
 
+  if(isLoading ){
+    return <Spinner />
+}
+
   return (
     <Box
-      d={{ base: selectedChat ? "none" : "flex", md: "flex" }}
+      display={{ base: selectedChat ? "none" : "flex", md: "flex" }}
       flexDir="column"
       alignItems="center"
       p={3}
@@ -64,7 +75,7 @@ const MyChats = ({ fetchAgain }) => {
         px={3}
         fontSize={{ base: "28px", md: "30px" }}
         fontFamily="Work sans"
-        d="flex"
+        display="flex"
         w="100%"
         justifyContent="space-between"
         alignItems="center"
@@ -72,7 +83,7 @@ const MyChats = ({ fetchAgain }) => {
         My Chats
       </Box>
       <Box
-        d="flex"
+        display="flex"
         flexDir="column"
         p={3}
         bg="#F8F8F8"
@@ -94,9 +105,7 @@ const MyChats = ({ fetchAgain }) => {
                 borderRadius="lg"
                 key={chat._id}
               >
-                <Text>
-                  {chat&&chat.users.user.name}
-                </Text>
+                <Text>{chat && chat.users.user.name}</Text>
                 {chat.latestMessage && (
                   <Text fontSize="xs">
                     <b>

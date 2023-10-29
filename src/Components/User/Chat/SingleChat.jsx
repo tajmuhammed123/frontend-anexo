@@ -4,16 +4,17 @@ import { Box, Text } from "@chakra-ui/layout";
 import { IconButton, Spinner, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import './style.css'
+import "./style.css";
 import io from "socket.io-client";
 import { ChatState } from "./Components/Context/ChatProvider";
-import Lottie from "lottie-react";
-import animationData from './TypingAnimation/typing.json'
-import { axiosManagerInstance, axiosUserInstance } from "../../../Constants/axios";
+import animationData from "./TypingAnimation/typing.json";
+import {
+  axiosUserInstance,
+} from "../../../Constants/axios";
 import ScrollableChat from "./Components/ScrollableChat";
 import { Button } from "@material-tailwind/react";
 import { toast } from "react-toastify";
-const ENDPOINT = "http://localhost:4000"; // "https://talk-a-tive.herokuapp.com"; -> After deployment
+const ENDPOINT = import.meta.env.VITE_USER_ROUTE;
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -26,16 +27,16 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   const GenerateError = (err) => {
     toast.error(err, {
-      position: 'top-center',
-      theme: 'colored',
-      autoClose: 3000
+      position: "top-center",
+      theme: "colored",
+      autoClose: 3000,
     });
   };
 
   const defaultOptions = {
     loop: true,
     autoplay: true,
-    animationData:animationData,
+    animationData: animationData,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },
@@ -43,13 +44,16 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const { selectedChat, setSelectedChat, user, notification, setNotification } =
     ChatState();
 
-  const  fetchMessages = async () => {
+  const fetchMessages = async () => {
     if (!selectedChat) return;
 
     try {
+      const userInfoString = localStorage.getItem("userInfo");
+      const userInfo = JSON.parse(userInfoString);
       const config = {
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token.token}`,
         },
       };
 
@@ -72,10 +76,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     if (event.key === "Enter" && newMessage) {
       socket.emit("stop typing", selectedChat._id);
       try {
+        const userInfoString = localStorage.getItem("userInfo");
+        const userInfo = JSON.parse(userInfoString);
         const config = {
           headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${user.token}`,
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userInfo.token.token}`,
           },
         };
         setNewMessage("");
@@ -116,9 +122,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   useEffect(() => {
     const handleNewMessageReceived = (newMessageReceived) => {
-      console.log('New message received:', newMessageReceived);
-      console.log('Selected chat compare:', selectedChatCompare);
-  
+      console.log("New message received:", newMessageReceived);
+      console.log("Selected chat compare:", selectedChatCompare);
+
       if (
         !selectedChatCompare || // If chat is not selected or doesn't match the current chat
         selectedChatCompare._id !== newMessageReceived.chat._id
@@ -132,19 +138,16 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         setMessages([...messages, newMessageReceived]);
       }
     };
-  
+
     // Register the event listener
     socket.on("message received", handleNewMessageReceived);
-  
+
     // Cleanup: Remove the event listener when the component unmounts
     return () => {
       // Unregister the event listener
       socket.off("message received", handleNewMessageReceived);
     };
-  }, [selectedChatCompare, notification, fetchAgain,messages]);
-  
-  
-  
+  }, [selectedChatCompare, notification, fetchAgain, messages]);
 
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
@@ -183,18 +186,26 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             px={2}
             w="100%"
             fontFamily="Work sans"
-            d="flex"
-            justifyContent={{ base: "space-between" }}
+            display="flex"
+            justifyContent={{ base: "start" }}
             alignItems="center"
           >
             <IconButton
-              d={{ base: "flex", md: "none" }}
+              display={{ base: "flex", md: "none" }}
               icon={<ArrowBackIcon />}
               onClick={() => setSelectedChat("")}
             />
+            <img
+              src={
+                selectedChat.users.manager &&
+                selectedChat.users.manager.profile_img
+              }
+              className="h-10 w-10 rounded-full me-2"
+            />
+            {selectedChat.users.manager && selectedChat.users.manager.name}
           </Text>
           <Box
-            d="flex"
+            display="flex"
             flexDir="column"
             justifyContent="flex-end"
             className="flex flex-end flex-col"
@@ -206,9 +217,15 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             overflowY="hidden"
           >
             {loading ? (
-              <Spinner size="xl" w={20} h={20} alignSelf="center" margin="auto" />
+              <Spinner
+                size="xl"
+                w={20}
+                h={20}
+                alignSelf="center"
+                margin="auto"
+              />
             ) : (
-              <div className="messages">
+              <div className="messages overflow-hidden">
                 <ScrollableChat messages={messages} user={user} />
               </div>
             )}
@@ -238,7 +255,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           </Box>
         </>
       ) : (
-        <Box d="flex" alignItems="center" justifyContent="center" h="100%">
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          h="100%"
+        >
           <Text fontSize="3xl" pb={3} fontFamily="Work sans">
             Click on a user to start chatting
           </Text>
@@ -246,7 +268,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       )}
     </>
   );
-  
 };
 
 export default SingleChat;

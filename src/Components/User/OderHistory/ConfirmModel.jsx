@@ -11,25 +11,31 @@ import {
 } from "@material-tailwind/react";
 import { useQueryClient } from "@tanstack/react-query";
 import { cancelOrder } from "../../../actions/UserActions";
- 
-export default function CancelButton({id}) {
+import { GenerateSuccess } from "../../../Validation/EventUpdation";
+import { ToastContainer } from "react-toastify";
+
+export default function CancelButton({ id }) {
   const [open, setOpen] = React.useState(false);
- 
+
   const handleOpen = () => setOpen((cur) => !cur);
 
-  const queryClient=useQueryClient()
+  const queryClient = useQueryClient();
 
-  const handleCancelOrder=async (id)=>{
+  const handleCancelOrder = async (id) => {
     try {
-      const res= await cancelOrder(id)
-      if(res.status){
-        queryClient.invalidateQueries(['bookinguser'])
+      const res = await cancelOrder(id);
+      if (res.status) {
+          GenerateSuccess("Order Cancelled Successfully");
+          setTimeout(() => {
+            handleOpen();
+          }, 2000);
+        queryClient.invalidateQueries(["bookinguser"]);
       }
     } catch (error) {
       console.log(error.message);
     }
-  }
- 
+  };
+
   return (
     <>
       <Button onClick={handleOpen}>Cancel</Button>
@@ -61,14 +67,15 @@ export default function CancelButton({id}) {
           </IconButton>
         </DialogHeader>
         <DialogBody className="overflow-hidden flex justify-around pr-2">
-        <Button onClick={()=>handleCancelOrder(id)}>Confirm</Button>
-        <Button>Reject</Button>
+          <Button onClick={() => handleCancelOrder(id)}>Confirm</Button>
+          <Button>Reject</Button>
         </DialogBody>
         <DialogFooter className="justify-between gap-2 border-t border-blue-gray-50">
           <Button variant="text" size="sm">
             Close
           </Button>
         </DialogFooter>
+        <ToastContainer/>
       </Dialog>
     </>
   );
