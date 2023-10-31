@@ -9,13 +9,11 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import React, { useState } from "react";
-import { Updated } from "../EditUser/Updated";
 import { updateProfile } from "../../../actions/UserActions";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ProfileUpdate } from "../../../Validation/validation";
-import { axiosUserInstance } from "../../../Constants/axios";
 import { Edit } from "@mui/icons-material";
 import { useEffect } from "react";
 import { GenerateSuccess } from "../../../Validation/EventUpdation";

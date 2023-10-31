@@ -6,7 +6,6 @@ import {
   DialogBody,
   DialogFooter,
   Input,
-  Textarea,
   Typography,
   Avatar,
   Badge,
@@ -16,8 +15,6 @@ import { axiosUserInstance } from "../../../Constants/axios";
 import { useQueryClient } from "@tanstack/react-query";
 import { useFormik } from "formik";
 import { ImageUpdate } from "../../../Validation/validation";
-import { EditIcon } from "@chakra-ui/icons";
-import { PencilIcon } from "@heroicons/react/24/outline";
 import { Edit } from "@mui/icons-material";
 import { useState } from "react";
 import { GenerateSuccess } from "../../../Validation/EventUpdation";

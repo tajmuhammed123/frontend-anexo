@@ -23,7 +23,7 @@ import {
 } from "@mui/icons-material";
 import { ChatState } from "../Chat/Components/Context/ChatProvider";
 import { ToastContainer, toast } from "react-toastify";
-import { ReviewModal } from "./reviewModal";
+import { ReviewModal } from "./ReviewModal";
 import { ReportModal } from "./ReportModal";
 import Spinner from "../../../Spinner";
 

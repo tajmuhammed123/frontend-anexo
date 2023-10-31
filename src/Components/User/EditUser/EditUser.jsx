@@ -13,7 +13,6 @@ import { ProfileUpdate } from "../../../Validation/validation";
 import { updateProfile } from "../../../actions/UserActions";
 import { Updated } from "./Updated";
 import { useNavigate } from "react-router-dom";
-import { axiosUserInstance } from "../../../Constants/axios";
 
 export function EditUser() {
   const queryClient = useQueryClient();
