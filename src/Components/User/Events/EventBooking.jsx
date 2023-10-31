@@ -94,7 +94,7 @@ function EventBooking() {
     console.log(eventdata);
     const response = await EventSubmit(eventdata);
     console.log(response);
-    if(response.data.status){
+    if(response.status){
       if (response.user.is_paid) {
           GenerateSuccess("Your Event Booking Saved");
           setTimeout(() => {
