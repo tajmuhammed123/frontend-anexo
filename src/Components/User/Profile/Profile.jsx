@@ -2,13 +2,7 @@ import { EditIcon } from "@chakra-ui/icons";
 import {
   Card,
   CardHeader,
-  CardBody,
-  CardFooter,
   Typography,
-  Tooltip,
-  Avatar,
-  Button,
-  Badge,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
