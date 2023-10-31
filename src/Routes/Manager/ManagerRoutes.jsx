@@ -10,7 +10,7 @@ import Bookings from "../../Components/Manager/Bookings/Bookings";
 import LayOut from "../../Components/Manager/LayOut/LayOut";
 import { Profile } from "../../Components/Manager/Profile/Profile";
 import ChatList from "../../Components/Manager/Chat/ChatList";
-import { Subscription } from "../../Components/Manager/Subscription/subscription";
+import { Subscription } from "../../Components/Manager/Subscription/Subscription";
 import Payment from "../../Components/Manager/Subscription/Payment/Payment";
 import Success from "../../Components/Manager/Subscription/Payment/Success";
 import { BookedUser } from "../../Components/Manager/Bookings/BookedUser";
