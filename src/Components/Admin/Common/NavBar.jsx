@@ -203,7 +203,7 @@ export function AdminNavbar() {
               />
             </svg>
             <img
-              src="/Images/Extrano black.PNG"
+              src="/Logo/AX BLACK.png"
               alt="Extrano"
               className="w-10"
               style={{ width: "60px" }}

@@ -247,7 +247,7 @@ export function StickyNavbar() {
             </svg>
             <img
               src="/Logo/AX BLACK.png"
-              alt="Extrano"
+              alt="Anexo"
               className="w-10"
               style={{ width: "60px" }}
             />
