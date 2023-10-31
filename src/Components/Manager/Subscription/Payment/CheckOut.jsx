@@ -57,7 +57,7 @@ function CehckOut({ method, price }) {
     const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://localhost:3000/success",
+        return_url: "https://frontend-anexo.vercel.app/success",
       },
       redirect: "if_required",
     });

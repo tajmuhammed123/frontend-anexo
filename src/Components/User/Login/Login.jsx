@@ -323,6 +323,18 @@ function LogIn() {
                     Sign Up
                   </a>
                 </Typography>
+                <Typography
+                  color="gray"
+                  className="mt-4 text-center font-normal"
+                >
+                  SginUp as Manager?{" "}
+                  <a
+                    onClick={() => navigate("/manager/signup")}
+                    className="font-medium text-gray-900"
+                  >
+                    Sign Up
+                  </a>
+                </Typography>
               </form>
             </CardBody>
           )}
