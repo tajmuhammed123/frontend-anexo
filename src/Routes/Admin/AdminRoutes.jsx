@@ -5,7 +5,7 @@ import AdminHome from "../../Components/Admin/Home/AdminHome";
 import AdminProtect from "./AdminProtect";
 import LayOut from "../../Components/Admin/LayOut/LayOut";
 import UserData from "../../Components/Admin/UserData/UserData";
-import EventCategory from "../../Components/Admin/Categories/eventCategory";
+import EventCategory from "../../Components/Admin/Categories/EventCategory";
 import { Report } from "../../Components/Admin/Reports/Report";
 import { Detail } from "../../Components/Admin/Reports/Detail";
 import BannerList from "../../Components/Admin/Banner/BannerList";
