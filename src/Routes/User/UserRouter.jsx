@@ -43,6 +43,7 @@ function UserRouter() {
     bookingsuccess: "/bookingsuccess",
     paymenthistory: "/paymenthistory",
     invoice: "/invoice",
+  
   };
   return (
     <Routes>
