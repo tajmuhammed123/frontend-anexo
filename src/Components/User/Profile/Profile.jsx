@@ -79,14 +79,14 @@ export function Profile() {
                   </Typography>
                   <Typography className="text-white">{user.email}</Typography>
                 </div>
-                <div className="5 flex-col items-center gap-0 py-5">
+                <div className="5 flex-col items-center flex justify-center gap-0 py-5">
                   <Typography variant="h5" className="text-white">
                     Wallet
                   </Typography>
                   <Typography variant="h5" className="text-white">
                     ₹ {user.wallet_amount}
                   </Typography>
-                  <Button onClick={()=>navigate('/paymenthistory')}>Payment History</Button>
+                  <Button color="white" onClick={()=>navigate('/paymenthistory')}>Payment History</Button>
                 </div>
               </div>
             </div>
