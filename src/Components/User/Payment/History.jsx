@@ -67,7 +67,7 @@ function History() {
               </tr>
             </thead>
             <tbody>
-              {data.map((item, index) => (
+              {data ? data.map((item, index) => (
                 <tr key={item._id} className="even:bg-blue-gray-50/50">
                   <td className="p-4">
                     <Typography
@@ -104,7 +104,7 @@ function History() {
                     </Typography>
                   </td>
                 </tr>
-              ))}
+              )): <h2>No Payments done</h2>}
             </tbody>
           </table>
         </div>

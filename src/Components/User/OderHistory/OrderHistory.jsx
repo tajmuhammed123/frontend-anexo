@@ -84,17 +84,6 @@ function OrderHistory() {
                 These are details about the last transactions
               </Typography>
             </div>
-            <div className="flex w-full shrink-0 gap-2 md:w-max">
-              <div className="w-full md:w-72">
-                <Input
-                  label="Search"
-                  icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-                />
-              </div>
-              {/* <Button className="flex items-center gap-3" size="sm">
-              <ArrowDownTrayIcon strokeWidth={2} className="h-4 w-4" /> Download
-            </Button> */}
-            </div>
           </div>
         </CardHeader>
         <CardBody className="overflow-y-scroll px-2">
@@ -125,7 +114,7 @@ function OrderHistory() {
                   : "p-4 border-b border-blue-gray-50";
 
                 return (
-                  <tr key={index}>
+                  <tr key={item._id}>
                     <td className={classes}>
                       <div className="flex items-center gap-3">
                         <Typography
@@ -189,10 +178,7 @@ function OrderHistory() {
             </tbody>
           </table>
         </CardBody>
-        <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-        <Button variant="outlined" size="sm">
-          Previous
-        </Button>
+        <CardFooter className="flex items-center justify-center border-t border-blue-gray-50 p-4">
         <div className="flex items-center gap-2">
           <IconButton variant="outlined" name="1" size="sm" onClick={(e)=>handlePagination(e.target.name)}>
             1
@@ -204,9 +190,6 @@ function OrderHistory() {
             3
           </IconButton>
         </div>
-        <Button variant="outlined" size="sm">
-          Next
-        </Button>
       </CardFooter>
       </Card>
     </div>
