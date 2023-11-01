@@ -55,13 +55,11 @@ function EventBooking() {
   useEffect(() => {
     fetchData();
 
-    console.log("heyy");
   }, []);
 
   const userInfoString = localStorage.getItem("userInfo");
 
   const userInfo = JSON.parse(userInfoString);
-  console.log(data);
   let eventsdata;
   if (data.eventData && data.eventData.events) {
     eventsdata = data.eventData.events;
@@ -86,14 +84,9 @@ function EventBooking() {
       eventArray.push(eventsdata[key]);
     }
   }
-  console.log(eventArray);
-
-  console.log(moment(eventdata.date).format("MMMM Do YYYY"));
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(eventdata);
     const response = await EventSubmit(eventdata);
-    console.log(response);
     if(response.status){
       if (response.user.is_paid) {
           GenerateSuccess("Your Event Booking Saved");
@@ -109,7 +102,6 @@ function EventBooking() {
     }
   };
   const currentDate = new Date();
-  console.log(excludedDates);
   const tileDisabled = ({ date }) => {
     if (excludedDates) {
       return excludedDates.some((excludedDate) =>

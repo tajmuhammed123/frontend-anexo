@@ -25,7 +25,6 @@ export const adminLogin= (email, password)=>async(dispatch)=>{
             { email, password },
             config
           );
-          console.log(data);
           localStorage.setItem("adminInfo", JSON.stringify(data));
           dispatch({
             type: ADMIN_LOGIN_SUCCESS,
@@ -102,7 +101,6 @@ export const adminLogin= (email, password)=>async(dispatch)=>{
 
   export const addEventCategorey = async(values)=>{
     try{
-      console.log(values);
       const config={
         headers:{
           "Content-Type": "multipart/form-data"
@@ -116,7 +114,6 @@ export const adminLogin= (email, password)=>async(dispatch)=>{
   }
   export const addBanner = async(values)=>{
     try{
-      console.log(values);
       const userData=localStorage.getItem('adminInfo')
       const userInfo=JSON.parse(userData)
       const config={
@@ -125,7 +122,6 @@ export const adminLogin= (email, password)=>async(dispatch)=>{
           Authorization: `Bearer ${userInfo.token.token}`,
         }
       }
-      console.log('hgj');
       const {data}=await axiosAdminInstance.post('/addbanner',values,config)
       return data
     }catch(error){

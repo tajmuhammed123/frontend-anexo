@@ -41,7 +41,6 @@ export const managerLoginReducer = (
       return { ...state, loading: true };
 
     case MANAGER_LOGIN_SUCCESS: {
-      console.log(action.payload);
       return { ...state, loading: false, manager: action.payload, error: null };
     }
 

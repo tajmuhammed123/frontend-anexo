@@ -19,7 +19,6 @@ function EmailVerified() {
   const { id } = useParams();
   useEffect(() => {
     dispatch(userVerify(id));
-    console.log("nice");
   }, []);
   useEffect(() => {
     const iconElement = document.querySelector(".flip-animation");

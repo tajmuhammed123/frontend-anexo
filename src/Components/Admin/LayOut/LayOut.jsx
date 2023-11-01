@@ -3,7 +3,6 @@ import { AdminNavbar } from "../Common/NavBar";
 import { Outlet } from "react-router-dom";
 
 function LayOut() {
-  console.log("reacged");
   return (
     <>
       <div className="main">

@@ -27,7 +27,6 @@ export function EditEvents({ id, events }) {
   const userInfo = JSON.parse(userInfoString);
 
   useEffect(() => {
-    console.log("reached");
     console.log(events);
     axiosManagerInstance
       .get(`/geteventdata/${userInfo.user._id}`)
@@ -47,15 +46,12 @@ export function EditEvents({ id, events }) {
         eventlist.push(eventName);
         //   setEvents((prevEvents) => [...prevEvents, eventName]);
         setEvents([...events, eventName]);
-        console.log(events);
       } else {
         const indexToRemove = eventlist.indexOf(eventName);
         if (indexToRemove !== -1) {
           events.splice(indexToRemove, 1);
         }
         setEvents([...events, eventName]);
-        //   setEvents((prevEvents) => prevEvents.filter((event) => event !== eventName));
-        console.log(eventlist);
       }
     } catch (error) {
       console.log(error.message);
@@ -64,7 +60,6 @@ export function EditEvents({ id, events }) {
 
   const handleSubmit = async () => {
     try {
-      console.log(eventlist);
       const res = await axiosManagerInstance.patch(`/editevents`, {
         id,
         eventlist,

@@ -35,7 +35,6 @@ function OrderHistory() {
         `/orderdata/${userInfo.user._id}/1`,
         config
       );
-      console.log(response.data.data);
         setData(response.data.data)
       return response.data.data;
     } catch (err) {
@@ -124,7 +123,6 @@ function OrderHistory() {
                 const classes = isLast
                   ? "p-4"
                   : "p-4 border-b border-blue-gray-50";
-                console.log(item);
 
                 return (
                   <tr key={index}>

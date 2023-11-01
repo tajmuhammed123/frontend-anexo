@@ -43,8 +43,6 @@ export function EditImage({ id, img }) {
     initialValues: initialValues,
     validationSchema: ImageUpdate,
     onSubmit: async (values, { resetForm }) => {
-      console.log("sub");
-      console.log(formData);
       setLoading(true);
       if (values) {
         const userData = localStorage.getItem("userInfo");
@@ -60,7 +58,6 @@ export function EditImage({ id, img }) {
           formData,
           config
         );
-        console.log(values);
         resetForm();
         setLoading(false);
         queryclient.invalidateQueries("userData");
@@ -75,25 +72,6 @@ export function EditImage({ id, img }) {
       }
     },
   });
-  //   const handleSubmit=async()=>{
-  //     try {
-  //         const userData=localStorage.getItem('userInfo')
-  //         const userInfo=JSON.parse(userData)
-  //         const config={
-  //             headers:{
-  //             Authorization: `Bearer ${userInfo.token.token}`,
-  //               "Content-Type": "multipart/form-data"
-  //             }
-  //           }
-  //       const res=await axiosUserInstance.post(`/editprofilephoto`,formData,config)
-  //       if(res.data.status){
-  //         queryclient.invalidateQueries('userData')
-  //         handleOpen()
-  //       }
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-  //   }
 
   const formData = new FormData();
   formData.append("profile", values.profile);
@@ -154,7 +132,6 @@ export function EditImage({ id, img }) {
                 type="file"
                 onChange={(event) => {
                   const selectedFile = event.currentTarget.files[0];
-                  console.log(selectedFile);
                   setFieldValue("profile", selectedFile);
                   const formData = new FormData();
                   formData.append("profile", selectedFile);

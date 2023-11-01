@@ -36,7 +36,6 @@ export function UnAvailableDate() {
   useEffect(() => {
     fetchData();
 
-    console.log("heyy");
   }, []);
 
   useEffect(() => {
@@ -65,7 +64,6 @@ export function UnAvailableDate() {
   const handleSubmit = async()=>{
     try {
       const date=dateData.map((dateString) => new Date(dateString))
-      console.log(date);
       const res=await axiosManagerInstance.put('/updatedates',{date,id:managerInfo.user._id})
       if(res.data.status){
         GenerateSuccess("Dates Updated Successfully");

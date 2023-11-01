@@ -25,7 +25,6 @@ export const managerReg= (name,email,mob, password)=>async(dispatch)=>{
               "Content-Type": "application/json"
             },
           };
-          console.log(name,email,mob, password);
           const { data } = await axiosManagerInstance.post(
             "/signup",
              {name,email,mob, password},
@@ -58,7 +57,6 @@ export const LogoutDetails = ()=> async (dispatch)=>{
 
   export const managerLogin= (email, password)=>async(dispatch)=>{
     try {
-      console.log(email,password);
         dispatch({
             type: MANAGER_LOGIN_REQUEST,
           });
@@ -74,7 +72,6 @@ export const LogoutDetails = ()=> async (dispatch)=>{
             { email, password },
             config
           );
-          console.log(data);
           localStorage.setItem("managerInfo", JSON.stringify(data));
           
           dispatch({
@@ -96,7 +93,6 @@ export const LogoutDetails = ()=> async (dispatch)=>{
 
 export const managerVerify= (id)=>async(dispatch)=>{
   try {
-    console.log();
       dispatch({
           type: MANAGER_LOGIN_REQUEST,
         });
@@ -114,7 +110,6 @@ export const managerVerify= (id)=>async(dispatch)=>{
           "/managerverify",
           config
         );
-        console.log(data);
         localStorage.setItem("managerInfo", JSON.stringify(data));
         
         dispatch({
@@ -145,20 +140,16 @@ export const forgotPassword = (email) => async (dispatch) => {
         "Content-Type": "application/json",
       },
     };
-    console.log('heyyy');
     const { data } = await axiosManagerInstance.patch(
       '/forgotpas',
       { email },
       config
     );
-      console.log('done');
-    console.log(data);
 
     dispatch({
       type: MANAGER_RESET_PASSWORD_SUCCESS,
       message: data,
     });
-    console.log(data);
     return data
   } catch (error) {
     dispatch({
@@ -188,7 +179,6 @@ export const forgotPasswordVerify =
         config
       );
 
-      console.log(data);
 
       dispatch({
         type: MANAGER_RESET_PASSWORD_SUCCESS,
@@ -213,15 +203,12 @@ export const managerDetail = (eventdata,formData)=>async(dispatch)=>{
         })
         const managerData=localStorage.getItem('managerInfo')
         const managerInfo=JSON.parse(managerData)
-        console.log(managerInfo.token.token);
         const config={
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${managerInfo.token.token}`,
           }
         }
-        console.log(formData.get(`images`))
-        console.log(tokenId.user._id);
         const {data} =await axiosManagerInstance.post(
          `/eventdata/${tokenId.user._id}`,
           {formData,eventdata},
@@ -244,7 +231,6 @@ export const managerDetail = (eventdata,formData)=>async(dispatch)=>{
 
 export const updateProfile= async(name,id,mob)=>{
   try {
-    console.log('njh');
     const userData=localStorage.getItem('managerInfo')
     const userInfo=JSON.parse(userData)
     const config = {
@@ -254,7 +240,6 @@ export const updateProfile= async(name,id,mob)=>{
       },
     }
       const data=await axiosManagerInstance.patch('/updatemanagerprofile',{name,id,mob},config)
-      console.log(data);
       return data
   } catch (error) {
       console.log(error.message);
@@ -272,7 +257,6 @@ export const subsciptionPayment= async(method)=>{
       },
     }
       const data=await axiosManagerInstance.get(`/subscriptionpayment/${method}`,config)
-      console.log(data);
       return data
   } catch (error) {
       console.log(error.message);
@@ -293,7 +277,6 @@ export const subscriptionSuccess= async(method)=>{
       id:userInfo.user._id
     }
       const data=await axiosManagerInstance.post('/subscriptionsuccess',values,config)
-      console.log(data);
       return data
   } catch (error) {
       console.log(error.message);

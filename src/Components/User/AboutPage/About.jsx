@@ -63,7 +63,6 @@ function About() {
         setRating(response.data.rating);
         setReview(response.data.review);
         setLoading(false);
-        console.log(response.data.review);
 
         const eventlist = response.data.result.events;
         setEventlist(eventlist);
@@ -79,7 +78,6 @@ function About() {
     return <Spinner />;
   }
 
-  console.log(data);
 
   const handleChat = async () => {
     try {
@@ -93,14 +91,10 @@ function About() {
           mangId,
           userId,
         });
-        console.log(data);
 
         if (!chats.find((c) => c._id === data._id)) {
-          console.log("nothing");
           setChats([data, ...chats]);
         }
-        console.log(data, "data");
-        console.log(chats, "chat");
         setSelectedChat(data);
         navigate("/chatlist");
       } else {

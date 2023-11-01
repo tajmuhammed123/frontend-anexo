@@ -40,11 +40,9 @@ function AdminLogIn() {
       } else if (!password) {
         GenerateError("Password cannot be null");
       } else {
-        setLoading(true); // Show the spinner
-        console.log(loading);
+        setLoading(true);
         const response = await dispatch(adminLogin(email, password));
         setLoading(false);
-        console.log(response);
         if (response.response) {
           toast(response.response.data.alert);
         }

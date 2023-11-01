@@ -25,7 +25,6 @@ const MyChats = ({ fetchAgain }) => {
   };
 
   const fetchChats = async () => {
-    // console.log(user._id);
     try {
       setIsLoading(true)
       const managerData = localStorage.getItem("managerInfo");
@@ -35,13 +34,11 @@ const MyChats = ({ fetchAgain }) => {
           Authorization: `Bearer ${managerInfo.token.token}`,
         },
       };
-      console.log(selectedChat);
       const userId = user.user._id;
       const { data } = await axiosManagerInstance.get(
         `/fetchchat/${userId}`,
         config
       );
-      console.log(data);
       setChats(data);
       setIsLoading(false)
     } catch (error) {

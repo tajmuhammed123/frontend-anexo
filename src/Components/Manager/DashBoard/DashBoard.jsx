@@ -51,10 +51,6 @@ function DashBoard() {
             categories: paymentData.map(item => `${new Date(item.startDate).getUTCDate()}/${new Date(item.startDate).getUTCMonth() + 1}`),
           },
         });
-        console.log(booking.paid);
-        console.log(paymentData);
-        console.log(response);
-        console.log(response.data.data);
       } catch (err) {
         console.error(err.message);
         // Handle error here

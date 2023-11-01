@@ -33,52 +33,15 @@ export function EditImages({ images }) {
 
   const userInfo = JSON.parse(userInfoString);
 
-  //   useEffect(()=>{
-  //     console.log('reached');
-  //     console.log(events);
-  //     axiosManagerInstance.get(`/geteventdata/${userInfo.user._id}`).then((res)=>{setEventdata(res.data.eventData)})
-  //     console.log(events);
-  //         setEvents(events)
-  //         console.log(eventlist);
-  //   },[eventlist])
-
   const handleOpen = () => setOpen(!open);
   const queryclient = useQueryClient();
 
-  // const handleSubmit=async()=>{
-  //   try {
-  //       const res=await axiosManagerInstance.patch(`/editimages`,{})
-  //       if(res.data.status){
-  //         queryclient.invalidateQueries('managerdata')
-  //         handleOpen()
-  //       }
-  //   } catch (error) {
-  //       console.log(error.message);
-  //   }
-  // }
 
   const handleImages = async (e) => {
     try {
-      console.log("jkhj");
       const selectedFiles = e.currentTarget.files;
-      console.log(selectedFiles);
       const fileArray = Array.from(selectedFiles);
-      console.log(fileArray);
-      // const fileArray=[]
-      // const files = Array.from(e.target.files);
-      // files.forEach((file) => {
-      //     fileArray.push(file)
-      // })
-      // console.log(files);
-      // console.log('hjg');
-      // console.log(fileArray);
-      // for (let i = 0; i < fileArray.length; i++) {
-      //     console.log(fileArray[i]);
-      //     formData.append("images", fileArray[i]);
-      //   }
       setImg(...fileArray);
-      console.log(img);
-      console.log(img);
     } catch (error) {
       console.log(error.message);
     }
@@ -108,8 +71,6 @@ export function EditImages({ images }) {
     initialValues: initialValues,
     validationSchema: BookingImageUpdate,
     onSubmit: async (values, { resetForm }) => {
-      console.log("sub");
-      console.log(formData);
       if (values) {
         const userData = localStorage.getItem("managerInfo");
         const userInfo = JSON.parse(userData);
@@ -147,7 +108,6 @@ export function EditImages({ images }) {
     setImg(images);
   }, []);
 
-  console.log(img);
 
   return (
     <>
@@ -190,7 +150,6 @@ export function EditImages({ images }) {
                 multiple
                 onChange={(event) => {
                   const selectedFile = event.currentTarget.files;
-                  console.log(selectedFile);
                   setFieldValue("profile", selectedFile);
                   setImg([...selectedFile]);
                 }}

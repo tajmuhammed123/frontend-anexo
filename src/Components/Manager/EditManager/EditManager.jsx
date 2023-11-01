@@ -37,15 +37,12 @@ export function EditManager() {
     initialValues: initialValues,
     validationSchema: ProfileUpdate,
     onSubmit: async (values, { resetForm }) => {
-      console.log(values);
-      console.log("sub");
       if (values) {
         let { data } = await updateProfile(
           values.name,
           userInfo.user._id,
           values.mob
         );
-        console.log(data);
         if (data.status) {
           navigate("/manager/profile");
         }

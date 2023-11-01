@@ -26,7 +26,6 @@ export function Detail() {
       );
       setData(response.data.data);
       setIsLoading(false);
-      console.log(data);
     } catch (error) {
       console.log(error.message);
     }
@@ -55,7 +54,6 @@ export function Detail() {
   if (isLoading) {
     return <Spinner />;
   }
-  console.log(data);
   return (
     <div className="flex align-middle text-center justify-center flex-col">
       <Typography variant="h3" className="py-5">

@@ -19,7 +19,6 @@ function ChatProvider({ children }) {
   const navigate = useNavigate();
   useEffect(() => {
     const managerInfo = JSON.parse(localStorage.getItem("managerInfo"));
-    console.log(managerInfo);
     setUser(managerInfo);
     setUser(managerInfo);
     setSelectedChat(initialChatState);

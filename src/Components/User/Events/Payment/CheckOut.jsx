@@ -67,7 +67,6 @@ function CehckOut({ Secret }) {
     });
     if (paymentIntent) {
       const res = await paymentSuccess(id);
-      console.log(res);
       navigate("/success");
     }
 
@@ -81,7 +80,6 @@ function CehckOut({ Secret }) {
   };
 
   const handleEmailChange = (event) => {
-    console.log(event);
   };
 
   const paymentElementOptions = {

@@ -56,8 +56,6 @@ function Home() {
         const response = axiosUserInstance
           .get("/homedata")
           .then((res) => setData(res.data.homeData));
-        console.log(response);
-        console.log(response.data.eventData);
       } catch (err) {
         console.error(err.message);
         // Handle error here
@@ -72,8 +70,6 @@ function Home() {
         const response = axiosUserInstance
           .get("/geteventdata")
           .then((res) => setEventdata(res.data.eventData));
-        console.log(response);
-        console.log(response.data.eventData);
       } catch (err) {
         console.error(err.message);
         // Handle error here
@@ -84,7 +80,6 @@ function Home() {
     homedata();
     console.log("Component is mounted");
   }, []);
-  console.log(data);
   const navigate = useNavigate();
 
   if (isLoading||isLoading1) {

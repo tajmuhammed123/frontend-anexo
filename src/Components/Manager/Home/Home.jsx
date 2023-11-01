@@ -66,10 +66,7 @@ function Home() {
   const [eventlist, setEventlist] = useState([]);
   const [review, setReview] = useState([]);
   const [userdata, setUserdata] = useState([]);
-  console.log(manager);
 
-  // const userdata=manager.user.eventData
-  console.log(userdata);
   useEffect(() => {
     console.log(manager);
     const eventlist = userdata.events;
@@ -92,12 +89,9 @@ function Home() {
           `/managerdata/${manager.user._id}`,
           config
         );
-        console.log(response);
-        console.log(response.data.review);
         setUserdata(response.data.data.eventData);
         setEventlist(response.data.data.eventData.events);
         setReview(response.data.review);
-        console.log(response.data.data);
       } catch (err) {
         console.error(err.message);
         // Handle error here

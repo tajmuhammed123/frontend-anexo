@@ -38,10 +38,9 @@ export default function UserData() {
         const response = await axiosAdminInstance
           .get("/getuserdata/1", config)
           .then((res) => {
-            setUserData(res.data.data), console.log(res.data.data);
+            setUserData(res.data.data)
           })
           .catch((err) => console.log(err.message));
-        console.log(response.data.data);
       } catch (err) {
         console.error(err.message);
         // Handle error here
@@ -62,7 +61,6 @@ export default function UserData() {
     try {
       const userData = localStorage.getItem("adminInfo");
       const userInfo = JSON.parse(userData);
-      console.log(userInfo);
       const config = {
         headers: {
           Authorization: `Bearer ${userInfo.token.token}`,

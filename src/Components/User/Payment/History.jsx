@@ -24,13 +24,10 @@ function History() {
           `/paymenthistory/${userInfo.user._id}`,
           config
         );
-        console.log(res);
         if (res.data) {
-          console.log(res.data);
           setData(res.data.data);
           setWallet(res.data.user.wallet_amount);
         }
-        console.log(res);
       } catch (error) {
         console.log(error.message);
       }

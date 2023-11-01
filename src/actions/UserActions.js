@@ -35,7 +35,6 @@ export const userReg= (name, mob, email, password)=>async(dispatch)=>{
             { name, mob, email, password },
             config
           );
-          console.log(data.status);
           localStorage.setItem("userInfo", JSON.stringify(data));
           dispatch({
             type: USER_REGISTER_SUCCESS,
@@ -55,7 +54,6 @@ export const userReg= (name, mob, email, password)=>async(dispatch)=>{
 }
 export const userLogin= (email, password)=>async(dispatch)=>{
     try {
-      console.log(email,password);
         dispatch({
             type: USER_LOGIN_REQUEST,
           });
@@ -71,7 +69,6 @@ export const userLogin= (email, password)=>async(dispatch)=>{
             { email, password },
             config
           );
-          console.log(data);
           localStorage.setItem("userInfo", JSON.stringify(data));
           
           dispatch({
@@ -92,7 +89,6 @@ export const userLogin= (email, password)=>async(dispatch)=>{
 }
 export const userVerify= (id)=>async(dispatch)=>{
     try {
-      console.log();
         dispatch({
             type: USER_LOGIN_REQUEST,
           });
@@ -110,7 +106,6 @@ export const userVerify= (id)=>async(dispatch)=>{
             "/verifyemail",
             config
           );
-          console.log(data);
           localStorage.setItem("userInfo", JSON.stringify(data));
           
           dispatch({
@@ -131,8 +126,6 @@ export const userVerify= (id)=>async(dispatch)=>{
 }
 export const userGoogleLogin= (value)=>async(dispatch)=>{
     try {
-      console.log('heyy');
-      console.log(value);
         dispatch({
             type: USER_GOOGLE_LOGIN_REQUEST,
           });
@@ -152,7 +145,6 @@ export const userGoogleLogin= (value)=>async(dispatch)=>{
             "/googlelogin", values ,
             config
           );
-          console.log(data);
           localStorage.setItem("userInfo", JSON.stringify(data));
           dispatch({
             type: USER_GOOGLE_LOGIN_SUCCESS,
@@ -182,20 +174,16 @@ export const forgotPassword = (email) => async (dispatch) => {
         "Content-Type": "application/json",
       },
     };
-    console.log('heyyy');
     const { data } = await axiosUserInstance.patch(
       '/forgotpas',
       { email },
       config
     );
-      console.log('done');
-    console.log(data);
 
     dispatch({
       type: RESET_PASSWORD_SUCCESS,
       message: data,
     });
-    console.log(data);
     return data
   } catch (error) {
     dispatch({
@@ -225,8 +213,6 @@ export const forgotPasswordVerify =
         config
       );
 
-      console.log(data);
-
       dispatch({
         type: RESET_PASSWORD_SUCCESS,
         message: data,
@@ -255,7 +241,6 @@ export const LogoutDetails = ()=> async (dispatch)=>{
 export const EventSubmit = async(eventdata)=>
 {
   try {
-    console.log(eventdata);
     const userData=localStorage.getItem('userInfo')
     const userInfo=JSON.parse(userData)
     const config = {
@@ -290,7 +275,6 @@ export const userPayment= async()=>{
           '/payment',
           config
         );
-        console.log(data);
         return data
   } catch (error) {
       console.log(error.message);
@@ -336,8 +320,6 @@ export const cancelOrder= async(id)=>{
 }
 export const updateProfile= async(id,name,mob)=>{
   try {
-    console.log('njh');
-    console.log(name);
     const userData=localStorage.getItem('userInfo')
     const userInfo=JSON.parse(userData)
     const config = {
@@ -347,13 +329,8 @@ export const updateProfile= async(id,name,mob)=>{
       },
     }
       const data=await axiosUserInstance.post('/updateuserprofile',{id,name,mob},config)
-      console.log(data);
       return data
   } catch (error) {
       console.log(error.message);
   }
 }
-
-
-// {"user":{"_id":"64f57c95b7cf0bdbf770373c","name":"Taj Muhammed","mob":9895299091,"email":"tajmuhammed0011@gmail.com","password":"$2b$10$dSEbzqbx8Ej6HcV26FTrtus1ua9laxeKdxINs9Dk3m11JRKWkQbSC","is_manager":false,"is_admin":false,"__v":0,"is_verified":true},
-// "token":{"userId":"64f57c95b7cf0bdbf770373c","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGY1N2M5NWI3Y2YwYmRiZjc3MDM3M2MiLCJpYXQiOjE2OTUyMjE1ODksImV4cCI6MTY5NTI4MTU4OX0.oZyz3LAEGTgfEZUZvFRhHdkHOF33Mhqm6K7VNpR8eVo","createdAt":"2023-09-20T14:29:52.042Z","_id":"650b07551449bf35e3db2a11","__v":0},"alert":"Logined","status":true}

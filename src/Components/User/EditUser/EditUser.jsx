@@ -44,7 +44,6 @@ export function EditUser() {
           values.name,
           values.mob
         );
-        console.log(data);
         if (data.status) {
           setLoading(false);
           navigate("/profile");

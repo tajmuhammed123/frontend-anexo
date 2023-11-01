@@ -19,7 +19,6 @@ export function ReportModal({ id }) {
   const handleReport = async () => {
     try {
       const user = JSON.parse(localStorage.getItem("userInfo"));
-      console.log(user);
       const userId = user.user._id;
       const managId = id;
       if (!report) {

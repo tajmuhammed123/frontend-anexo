@@ -26,7 +26,6 @@ function LogIn() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const forgotPasswordData = useSelector((state) => state.forgotPassword);
-  console.log(forgotPasswordData);
   const [value, setValue] = useState({
     email: "",
     password: "",
@@ -64,10 +63,8 @@ function LogIn() {
         GenerateError("Password cannot be null");
       } else {
         setLoading(true);
-        console.log(loading);
         const response = await dispatch(userLogin(email, password));
         setLoading(false);
-        console.log(response);
         if (response.response) {
           toast(response.response.data.alert);
         }
@@ -119,7 +116,6 @@ function LogIn() {
             }
           );
 
-          console.log(response.data);
 
           // Assuming dispatch is asynchronous, you may want to wait for the result.
           const result = await dispatch(userGoogleLogin(response.data));

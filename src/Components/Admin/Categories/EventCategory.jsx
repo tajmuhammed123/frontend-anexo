@@ -25,11 +25,8 @@ function EventCategory() {
     initialValues: initialValues,
     validationSchema: CategoreySchema,
     onSubmit: async (values, { resetForm }) => {
-      console.log("sub");
-      console.log(formData);
       if (values) {
         await addEventCategorey(formData);
-        console.log(values);
         resetForm();
         queryClient.invalidateQueries("categorey");
       }
@@ -38,13 +35,6 @@ function EventCategory() {
   const formData = new FormData();
   formData.append("categorey", values.categorey);
   formData.append("description", values.description);
-  // for (let i = 0; i < values.eventlogo.length; i++) {
-  //     formData.append("eventlogo", values.eventlogo[i]);
-  //   }
-  formData.append("eventlogo", values.eventlogo);
-  for (const pair of formData.entries()) {
-    console.log(pair[0], pair[1]);
-  }
   return (
     <div className="flex justify-center pt-5">
       <div className="flex-col">
@@ -99,18 +89,10 @@ function EventCategory() {
                 name="eventlogo"
                 onChange={(event) => {
                   const selectedFile = event.currentTarget.files[0];
-                  console.log(selectedFile);
                   setFieldValue("eventlogo", selectedFile);
 
                   const formData = new FormData();
                   formData.append("eventlogo", selectedFile);
-
-                  //   for (let i = 0; i < selectedFiles.length; i++) {
-                  //     formData.append("eventlogo", selectedFiles[i]);
-                  //   }
-                  for (const pair of formData.entries()) {
-                    console.log(pair[0], pair[1]);
-                  }
                 }}
               />
               {touched.eventlogo && errors.eventlogo && (

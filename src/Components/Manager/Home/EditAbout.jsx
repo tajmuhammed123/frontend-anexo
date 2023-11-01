@@ -23,7 +23,6 @@ import { useEffect } from "react";
 export function EditAbout({ id, aboutdata }) {
   const [open, setOpen] = React.useState(false);
   const [about, setAbout] = useState("");
-  console.log(aboutdata);
   const handleOpen = () => setOpen(!open);
   const queryclient = useQueryClient();
   const handleAbout = async () => {

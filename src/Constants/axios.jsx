@@ -18,7 +18,6 @@ axiosAdminInstance.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log("hj");
     if (error.response.data.message === "user expired") {
       localStorage.removeItem("adminInfo");
       window.location.href = "/admin/login";
@@ -34,11 +33,9 @@ axiosUserInstance.interceptors.response.use(
       localStorage.removeItem("userInfo");
       window.location.href = "/login";
     }
-    console.log(response, "fdgf");
     return response;
   },
   (error) => {
-    console.log("hj");
     if (
       error.response.data.message === "user expired" ||
       error.response.data.message === "user blocked"
@@ -53,11 +50,9 @@ axiosUserInstance.interceptors.response.use(
 );
 axiosManagerInstance.interceptors.response.use(
   (response) => {
-    console.log(response, "fdgf");
     return response;
   },
   (error) => {
-    console.log("hj");
     if (error.response.data.message === "user expired") {
       localStorage.removeItem("managerInfo");
       window.location.href = "/manager/login";

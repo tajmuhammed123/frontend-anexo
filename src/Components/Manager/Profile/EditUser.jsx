@@ -49,7 +49,6 @@ function EditUser({ user }) {
           userInfo.user._id,
           values.mob
         );
-        console.log(data);
         setLoading(false);
         resetForm();
         if (data.status) {
@@ -67,12 +66,7 @@ function EditUser({ user }) {
       }
     },
   });
-  console.log(values);
 
-  //   if(loading ){
-  //     return <div className='h-screen w-screen flex items-center justify-center'>
-  //       <Spinner /></div>;
-  // }
   return (
     <>
       <Edit onClick={handleOpen} />

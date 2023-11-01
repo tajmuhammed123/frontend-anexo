@@ -61,7 +61,6 @@ function SideDrawer() {
     chats,
     setChats,
   } = ChatState();
-  console.log(user);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
@@ -101,7 +100,6 @@ function SideDrawer() {
   };
 
   const accessChat = async (userId) => {
-    console.log(userId);
 
     try {
       setLoadingChat(true);
@@ -117,14 +115,10 @@ function SideDrawer() {
         { mangId, userId },
         config
       );
-      console.log(data);
 
       if (!chats.find((c) => c._id === data._id)) {
-        console.log("nothing");
         setChats([data, ...chats]);
       }
-      console.log(data, "data");
-      console.log(chats, "chat");
       setSelectedChat(data);
       setLoadingChat(false);
       onClose();

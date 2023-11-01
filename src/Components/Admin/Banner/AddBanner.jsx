@@ -17,14 +17,7 @@ function AddBanner() {
   const queryClient = useQueryClient();
   const [data, setData] = useState([]);
   const { id } = useParams();
-  // useEffect(()=>{
-  //     console.log('fdgg');
-  //     console.log(id);
-  //     axiosAdminInstance.get(`/getbannerdata/${id}`).then((res)=>{setData(res.data.banner.banner_text),console.log(res)})
-
-  //   },[])
   const navigate = useNavigate();
-  console.log(data);
   let initialValues = {
     banner_text: "",
     main_text: "",
@@ -42,8 +35,7 @@ function AddBanner() {
             : ""),
           (initialValues.button_text = res.data.banner
             ? res.data.banner.button_text
-            : ""),
-          console.log(res.data.banner);
+            : "")
       }),
   });
   const {
@@ -58,13 +50,9 @@ function AddBanner() {
     initialValues: initialValues,
     validationSchema: BannnerUpdation,
     onSubmit: async (values, { resetForm }) => {
-      console.log("sub");
-      console.log(formData);
       if (values) {
-        console.log("hjds");
         await addBanner(formData);
         navigate("/admin/bannerlist");
-        console.log(values);
         resetForm();
         //   queryClient.invalidateQueries("categorey");
       }
@@ -122,7 +110,6 @@ function AddBanner() {
               name="banner_img"
               onChange={(event) => {
                 const selectedFile = event.currentTarget.files[0];
-                console.log(selectedFile);
                 setFieldValue("banner_img", selectedFile);
                 const formData = new FormData();
                 formData.append("banner_img", selectedFile);

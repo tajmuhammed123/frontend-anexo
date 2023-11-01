@@ -38,9 +38,7 @@ export default function ReportData({chartData,booking, managerInfo}) {
           `/bookingdata/${managerInfo.user._id}`,
           config
         );
-        console.log(response);
         setData(response.data.data);
-        console.log(response.data.data);
       } catch (err) {
         console.error(err.message);
         // Handle error here
@@ -49,7 +47,6 @@ export default function ReportData({chartData,booking, managerInfo}) {
   });
 
   const downloadPDF = () =>{
-    console.log('jhf');
     const capture = document.querySelector('.actual-receipt');
     html2canvas(capture).then((canvas)=>{
       const imgData = canvas.toDataURL('img/png');

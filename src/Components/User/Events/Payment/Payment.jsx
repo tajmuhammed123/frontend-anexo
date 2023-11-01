@@ -13,7 +13,6 @@ const Payment = () => {
     const request = async () => {
       try {
         const res = await userPayment();
-        console.log(res);
         setClientSecret(res.data.clientSecret);
       } catch (error) {
         console.log(error.message);

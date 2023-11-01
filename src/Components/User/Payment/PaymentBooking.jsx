@@ -22,7 +22,6 @@ const PaymentBooking = () => {
         //       },
         //     };
         const res = await axiosUserInstance.get(`/paymentbookingdata/${id}`);
-        console.log(res);
         setPrice(res.data.amount);
         setClientSecret(res.data.clientSecret);
       } catch (error) {

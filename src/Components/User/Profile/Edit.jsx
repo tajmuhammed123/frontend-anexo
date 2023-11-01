@@ -35,7 +35,6 @@ function EditUser({ user }) {
     mob: userInfo.user.mob,
     id: userInfo.user._id,
   };
-  console.log(initialValues);
   const {
     values,
     errors,
@@ -55,7 +54,6 @@ function EditUser({ user }) {
           values.name,
           values.mob
         );
-        console.log(data);
         if (data.status) {
           setLoading(false);
           GenerateSuccess("Image Updated Successfully");
@@ -70,7 +68,6 @@ function EditUser({ user }) {
       }
     },
   });
-  console.log(values);
 
   if (loading) {
     return (

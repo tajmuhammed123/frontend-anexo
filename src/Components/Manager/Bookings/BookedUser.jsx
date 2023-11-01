@@ -50,9 +50,7 @@ export function BookedUser() {
           `/bookeddetails/${id}`,
           config
         );
-        console.log(response);
         setData(response.data.data);
-        console.log(response.data.data);
       } catch (err) {
         console.error(err.message);
         // Handle error here
@@ -61,31 +59,19 @@ export function BookedUser() {
   });
   const handleChat = async () => {
     try {
-      // const config = {
-      //   headers: {
-      //     "Content-type": "application/json",
-      //     Authorization: `Bearer ${user.user.token}`,
-      //   },
-      // };
-      // const userId=user.user._id
 
       const managerInfoString = localStorage.getItem("managerInfo");
 
       const managerInfo = JSON.parse(managerInfoString);
       const mangId = managerInfo.user._id;
-      console.log(mangId);
       const { data } = await axiosUserInstance.post(`/accesschat`, {
         mangId,
         userId,
       });
-      console.log(data);
 
       if (!chats.find((c) => c._id === data._id)) {
-        console.log("nothing");
         setChats([data, ...chats]);
       }
-      console.log(data, "data");
-      console.log(chats, "chat");
       setSelectedChat(data);
       navigate("/manager/chat");
     } catch (error) {

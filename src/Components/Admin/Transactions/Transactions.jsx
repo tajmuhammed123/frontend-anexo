@@ -25,7 +25,6 @@ function UserData() {
           })
           .catch((err) => console.log(err.message));
         setBookData(response.data.data);
-        console.log(bookData);
       } catch (err) {
         console.error(err.message);
       }

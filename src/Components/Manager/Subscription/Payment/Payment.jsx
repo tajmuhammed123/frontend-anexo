@@ -16,7 +16,6 @@ const Payment = () => {
     const request = async () => {
       try {
         const res = await subsciptionPayment(method);
-        console.log(res);
         setClientSecret(res.data.clientSecret);
         setPirce(res.data.price);
       } catch (error) {

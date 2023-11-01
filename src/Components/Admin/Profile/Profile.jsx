@@ -10,7 +10,6 @@ import EventCategory from "../Categories/eventCategory";
 
 export function Profile() {
   const { manager } = useSelector((state) => state.adminInfo);
-  console.log(manager);
   return (
     <>
       <div className="flex mt-8 align-middle items-center h-screen flex-col">

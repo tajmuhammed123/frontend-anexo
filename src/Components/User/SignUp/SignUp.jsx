@@ -50,7 +50,6 @@ function SignUp() {
         setLoading(true);
         const response = await dispatch(userReg(name, mob, email, password));
         setLoading(false);
-        console.log(response);
         if (response) {
           toast(response.alert);
         }

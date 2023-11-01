@@ -38,7 +38,6 @@ export function Report() {
           ([_id, name]) => ({ _id, name })
         );
         setReport(uniqueManager);
-        console.log(uniqueManager);
       } catch (err) {
         console.error(err.message);
       }

@@ -26,7 +26,6 @@ function LogIn() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const forgotPasswordData = useSelector((state) => state.forgotPassword);
-  console.log(forgotPasswordData);
   const [value, setValue] = useState({
     email: "",
     password: "",
@@ -65,9 +64,7 @@ function LogIn() {
         setLoading(true); // Show the spinner
         console.log(loading);
         const response = await dispatch(managerLogin(email, password));
-        setLoading(false); // Hide the spinner when the response is received
-        console.log(loading);
-        console.log(response);
+        setLoading(false); 
         if (response.response) {
           toast(response.response.data.alert);
         }

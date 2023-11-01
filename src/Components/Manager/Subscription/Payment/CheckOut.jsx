@@ -76,7 +76,6 @@ function CehckOut({ method, price }) {
   };
 
   const handleEmailChange = (event) => {
-    console.log(event);
   };
 
   const paymentElementOptions = {

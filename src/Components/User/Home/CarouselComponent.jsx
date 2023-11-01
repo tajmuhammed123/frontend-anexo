@@ -18,10 +18,7 @@ const CarouselComponent = () => {
             "Content-Type": "application/json",
           },
         };
-        console.log('banner');
         const response = await axiosUserInstance.get('/bannerdata',config);
-        console.log(response);
-        console.log(response.data.banner);
         setData(response.data.banner);
       } catch (err) {
         console.error(err.message);
@@ -30,7 +27,6 @@ const CarouselComponent = () => {
     },
   });
   const navigate=useNavigate()
-  console.log(data);
   return (
     <div className="mx-auto">
       <Carousel

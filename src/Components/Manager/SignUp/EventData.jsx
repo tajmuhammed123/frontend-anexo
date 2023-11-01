@@ -59,9 +59,6 @@ function EventData() {
             setEventdata(res.data.eventData),
               setManagerData(res.data.managerData.eventData);
           });
-        console.log(managerData);
-        console.log(response.data.managerData);
-        console.log(response.data.eventData);
       } catch (err) {
         console.error(err.message);
         // Handle error here
@@ -76,22 +73,18 @@ function EventData() {
   }, []);
 
   useEffect(() => {
-    console.log(eventdata); // Log the updated img state here
+    console.log(eventdata); 
   }, [eventdata]);
 
   const handleEvents = (eventName) => {
     if (!events.includes(eventName)) {
       events.push(eventName);
-      //   setEvents((prevEvents) => [...prevEvents, eventName]);
-      console.log(events);
       setEventData((eventdata) => ({ ...eventdata, events }));
     } else {
       const indexToRemove = events.indexOf(eventName);
       if (indexToRemove !== -1) {
         events.splice(indexToRemove, 1);
       }
-      //   setEvents((prevEvents) => prevEvents.filter((event) => event !== eventName));
-      console.log(events);
       setEventData({ ...eventdata, events: events });
     }
   };
@@ -99,26 +92,10 @@ function EventData() {
   const formData = new FormData();
   const handleImages = async (e) => {
     try {
-      console.log("jkhj");
       const selectedFiles = e.currentTarget.files;
-      console.log(selectedFiles);
       const fileArray = Array.from(selectedFiles);
-      console.log(fileArray);
-      // const fileArray=[]
-      // const files = Array.from(e.target.files);
-      // files.forEach((file) => {
-      //     fileArray.push(file)
-      // })
-      // console.log(files);
-      // console.log('hjg');
-      // console.log(fileArray);
-      // for (let i = 0; i < fileArray.length; i++) {
-      //     console.log(fileArray[i]);
-      //     formData.append("images", fileArray[i]);
-      //   }
       img.push(...selectedFiles);
       setEventData({ ...eventdata, [e.target.name]: img });
-      console.log(eventdata);
     } catch (error) {
       console.log(error.message);
     }
@@ -128,9 +105,7 @@ function EventData() {
     const updatedImg = [...img];
     updatedImg.splice(index, 1);
     setImg(() => [...updatedImg]);
-    console.log(img);
     setEventData({ ...eventdata, profileImage: img });
-    console.log(eventdata);
   };
   useEffect(() => {
     console.log(img);
@@ -138,21 +113,9 @@ function EventData() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(eventdata);
     setEventData({ ...eventdata, events: events });
 
-    // formData.append('events',events)
-    // formData.append('eventdata',eventdata)
-    // let form=JSON.stringify(formData)
-    // console.log(form);
-    // for (const [key, value] of formData.entries()) {
-    //     console.log(key, value);
-    //   }
-    //   formData.forEach((value, key) => {
-    //     console.log(key, value);
-    //   })
     const response = await dispatch(managerDetail(eventdata, formData));
-    console.log(response);
     if (response.status) {
       localStorage.setItem("managerToken", response.token);
         GenerateSuccess("Updated Data Successfully");
@@ -251,7 +214,6 @@ function EventData() {
                   onChange={(e) =>
                     setEventData(
                       { ...eventdata, [e.target.name]: e.target.files[0] },
-                      console.log(e.target.files[0])
                     )
                   }
                   className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"

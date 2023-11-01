@@ -51,9 +51,7 @@ function ManagerSignUp() {
       } else if (!password) {
         GenerateError("Your password cannot be null");
       } else {
-        console.log(value);
         const response = await dispatch(managerReg(name, email, mob, password));
-        console.log(response);
         if (response.status) {
           toast("Check Your mail and verify");
         } else {

@@ -58,7 +58,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       };
 
       setLoading(true);
-      console.log(selectedChat);
       const { data } = await axiosUserInstance.get(
         `/message/${selectedChat._id}`,
         config
@@ -94,7 +93,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           },
           config
         );
-        console.log(user);
         socket.emit("new message", data);
         setMessages([...messages, data]);
       } catch (error) {
@@ -122,8 +120,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   useEffect(() => {
     const handleNewMessageReceived = (newMessageReceived) => {
-      console.log("New message received:", newMessageReceived);
-      console.log("Selected chat compare:", selectedChatCompare);
 
       if (
         !selectedChatCompare ||

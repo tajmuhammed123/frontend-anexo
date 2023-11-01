@@ -35,7 +35,6 @@ function AdminHome() {
     try {
       const response = ManagerApprove(id);
       queryClient.invalidateQueries("manager");
-      console.log(response.status);
     } catch (error) {
       console.log(error.message);
     }
@@ -44,8 +43,6 @@ function AdminHome() {
     try {
       const response = ManagerReject(id);
       queryClient.invalidateQueries("manager");
-      console.log(response);
-      console.log(response.status);
     } catch (error) {
       console.log(error.message);
     }
@@ -57,7 +54,6 @@ function AdminHome() {
 
   const handleData = async (num) => {
     try {
-      console.log(num);
       fetchData(num);
     } catch (error) {
       console.log(error.message);
@@ -80,7 +76,6 @@ function AdminHome() {
         config
       );
       setData(response.data.data);
-      console.log(response.data.data);
       return response.data.data;
     } catch (err) {
       console.error(err.message);

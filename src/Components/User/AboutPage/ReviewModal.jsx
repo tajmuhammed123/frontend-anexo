@@ -23,7 +23,6 @@ export function ReviewModal({ id }) {
   }, [rating]);
 
   const handleRatingChange = (newRating) => {
-    console.log(newRating, "new");
     setRating(newRating);
   };
   useEffect(() => {
@@ -36,9 +35,7 @@ export function ReviewModal({ id }) {
   const handleSubmit = async () => {
     try {
       const user = JSON.parse(localStorage.getItem("userInfo"));
-      console.log(user);
       const userId = user.user._id;
-      console.log(id);
       const managId = id;
       if (!content) {
         toast("Content Cannot be null");
@@ -58,7 +55,6 @@ export function ReviewModal({ id }) {
           { content, rating, managId, userId },
           config
         );
-        console.log(data);
         if (data.message) {
           handleOpen();
           toast(data.message);
@@ -66,7 +62,6 @@ export function ReviewModal({ id }) {
           handleOpen();
         }
       }
-      console.log(rating, "rslt");
     } catch (error) {
       console.log(error.message);
     }
