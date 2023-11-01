@@ -248,8 +248,9 @@ export function StickyNavbar() {
             <img
               src="/Logo/AX BLACK.png"
               alt="Anexo"
-              className="w-10"
+              className="w-10 cursor-pointer"
               style={{ width: "60px" }}
+              onClick={()=>navigate('/')}
             />
           </div>
 

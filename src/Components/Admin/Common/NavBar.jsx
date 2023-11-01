@@ -205,8 +205,9 @@ export function AdminNavbar() {
             <img
               src="/Logo/AX BLACK.png"
               alt="Extrano"
-              className="w-10"
+              className="w-10 cursor-pointer"
               style={{ width: "60px" }}
+              onClick={()=>navigate('/admin/')}
             />
           </div>
 

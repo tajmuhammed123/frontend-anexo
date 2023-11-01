@@ -29,7 +29,7 @@ function ManagerRoutes() {
     subscriptionpayment: "/subscriptionpayment/:method",
     subscriptionsuccess: "/subscriptionsuccess",
     bookinguser: "/bookinguser/:id",
-    dashboard: "/dashboard",
+    eventdetails: "/eventdetails",
   };
   return (
     <Routes>
@@ -52,7 +52,7 @@ function ManagerRoutes() {
           }
         ></Route>
         <Route
-          index
+          path={routeObj.eventdetails}
           element={
             <ManagerProtect>
               <Home />
@@ -120,7 +120,7 @@ function ManagerRoutes() {
           }
         ></Route>
         <Route
-          path={routeObj.dashboard}
+          index
           element={
             <ManagerProtect>
               <DashBoard />

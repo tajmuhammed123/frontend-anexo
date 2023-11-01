@@ -6,9 +6,9 @@ import {
   ListItemSuffix,
   Chip,
 } from "@material-tailwind/react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { LogoutDetails } from "../../../actions/ManagerActions";
+import { useNavigate } from "react-router-dom";
 
 export function SidebarList({ closeSidebar }) {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ export function SidebarList({ closeSidebar }) {
 
   return (
     <List>
-      <ListItem onClick={() => (navigate("/manager/"), closeSidebar())}>
+      <ListItem onClick={() => (navigate("/manager/eventdetails"), closeSidebar())}>
         <ListItemPrefix>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ export function SidebarList({ closeSidebar }) {
             />
           </svg>
         </ListItemPrefix>
-        Dashboard
+        Event Details
       </ListItem>
       <ListItem onClick={() => (navigate("/manager/bookings"), closeSidebar())}>
         <ListItemPrefix>

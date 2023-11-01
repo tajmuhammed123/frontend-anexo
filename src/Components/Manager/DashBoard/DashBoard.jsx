@@ -13,14 +13,8 @@ function DashBoard() {
   const [paymentData,setPaymentData]=useState([])
 
   // Define your static chart data here
-  const staticChartData = [
-    {
-      name: "Weekly Data",
-      data: paymentData.map((item)=>(
-        item.count
-      )),
-    },
-  ];
+  const managerData = localStorage.getItem("managerInfo");
+  const managerInfo = JSON.parse(managerData);
 
   const { isLoading, error } = useQuery({
     queryKey: ["dashboarddata"],
@@ -40,6 +34,23 @@ function DashBoard() {
         );
         setPaymentData(response.data.payment)
         setBooking(response.data.bookings)
+        const staticChartData = [
+          {
+            name: "Weekly Data",
+            data: paymentData.map((item)=>(
+              item.count
+            )),
+          },
+        ];
+        setChartData(staticChartData);
+        setChartOptions({
+          chart: {
+            id: "basic-bar",
+          },
+          xaxis: {
+            categories: paymentData.map(item => `${new Date(item.startDate).getUTCDate()}/${new Date(item.startDate).getUTCMonth() + 1}`),
+          },
+        });
         console.log(booking.paid);
         console.log(paymentData);
         console.log(response);
@@ -51,20 +62,6 @@ function DashBoard() {
     },
   });
 
-  useEffect(() => {
-    
-    // Set the chart data and options when the component mounts
-    setChartData(staticChartData);
-    setChartOptions({
-      chart: {
-        id: "basic-bar",
-      },
-      xaxis: {
-        categories: paymentData.map(item => `${new Date(item.startDate).getUTCDate()}/${new Date(item.startDate).getUTCMonth() + 1}`),
-      },
-    });
-    
-  }, []);
 
   const series = [booking.paid, booking.notPaid, booking.pending, booking.cancel];
   const options = {
@@ -86,7 +83,7 @@ function DashBoard() {
           Report
         </Typography>
         <div>
-            <ReportData/>
+          <ReportData chartData={chartData} booking={booking} managerInfo={managerInfo}/>
         </div>
         <div className="flex justify-around w-2/3">
           <Card className="mt-6 w-96 mb-9">

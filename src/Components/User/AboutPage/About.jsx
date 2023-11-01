@@ -51,6 +51,7 @@ function About() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [review, setReview] = useState([]);
+  const [rating, setRating] = useState(0);
   const [eventlist, setEventlist] = useState([]);
 
   useEffect(() => {
@@ -59,6 +60,7 @@ function About() {
         setLoading(true);
         const response = await axiosUserInstance.get(`/detailpage?id=${id}`);
         setData(response.data.result);
+        setRating(response.data.rating);
         setReview(response.data.review);
         setLoading(false);
         console.log(response.data.review);
@@ -191,14 +193,14 @@ function About() {
                     color="white"
                     className="font-normal uppercase"
                   >
-                    LIKES
+                    RATING
                   </Typography>
                   <Typography
                     variant="h1"
                     color="white"
                     className=" flex justify-center gap-1 text-7xl font-normal"
                   >
-                    29
+                    {rating}
                   </Typography>
                 </CardHeader>
               </div>
@@ -276,7 +278,6 @@ function About() {
                 <ImageListItem key={index}>
                   <img
                     className="rounded-md"
-                    srcSet={`${img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                     src={`${img}?w=248&fit=crop&auto=format`}
                     alt={img}
                   />

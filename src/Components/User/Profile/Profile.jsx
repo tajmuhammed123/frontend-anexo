@@ -1,5 +1,6 @@
 import { EditIcon } from "@chakra-ui/icons";
 import {
+  Button,
   Card,
   CardHeader,
   Typography,
@@ -85,7 +86,7 @@ export function Profile() {
                   <Typography variant="h5" className="text-white">
                     ₹ {user.wallet_amount}
                   </Typography>
-                  {/* <Button>Withdraw</Button> */}
+                  <Button onClick={navigate('/paymenthistory')}>Payment History</Button>
                 </div>
               </div>
             </div>

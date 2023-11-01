@@ -124,8 +124,8 @@ function Home() {
         <h1 className="main_text">Mr.{manager.user.name}</h1>
       </div>
       <div className="flex justify-start mr-5 my-5"></div>
-      <div className="m-5 w-full justify-between">
-        <Button onClick={() => navigate("/manager/eventdata")}>
+      <div className="m-5 w-48 justify-between flex-col flex">
+        <Button className="mb-4" onClick={() => navigate("/manager/eventdata")}>
           Add Event Datas
         </Button>
         <UnAvailableDate/>
@@ -191,14 +191,14 @@ function Home() {
                   color="white"
                   className="font-normal uppercase"
                 >
-                  LIKES
+                  RATING
                 </Typography>
                 <Typography
                   variant="h1"
                   color="white"
                   className=" flex justify-center gap-1 text-7xl font-normal"
                 >
-                  29
+                  {manager.user.rating}
                 </Typography>
               </CardHeader>
             </div>

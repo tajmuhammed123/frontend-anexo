@@ -6,14 +6,47 @@ import {
   DialogHeader,
   DialogBody,
   DialogFooter,
+  Card,
+  Typography,
 } from "@material-tailwind/react";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import moment from 'moment';
+import { axiosManagerInstance } from '../../../Constants/axios';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
  
-export default function ReportData() {
+export default function ReportData({chartData,booking, managerInfo}) {
   const [open, setOpen] = React.useState(false);
+  const [data, setData] = useState([]);
  
   const handleOpen = () => setOpen(!open);
+
+  const { isLoading, error } = useQuery({
+    queryKey: ["reportdata"],
+    queryFn: async () => {
+      try {
+        const managerData = localStorage.getItem("managerInfo");
+        const managerInfo = JSON.parse(managerData);
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${managerInfo.token.token}`,
+          },
+        };
+        const response = await axiosManagerInstance.get(
+          `/bookingdata/${managerInfo.user._id}`,
+          config
+        );
+        console.log(response);
+        setData(response.data.data);
+        console.log(response.data.data);
+      } catch (err) {
+        console.error(err.message);
+        // Handle error here
+      }
+    },
+  });
 
   const downloadPDF = () =>{
     console.log('jhf');
@@ -27,24 +60,41 @@ export default function ReportData() {
       doc.save('invoice.pdf');
     })
   }
+
+  const totalAdvanceAmount = data
+  .filter(item => item.is_paid === 'paid')
+  .reduce((total, item) => total + item.advance_amount, 0);
+
+ 
+const TABLE_HEAD = ["EVENT NAME", "DATE", "ADDRESS","ADVANCE"];
+ 
  
   return (
     <div className='bodydata'>
       <Button onClick={handleOpen}>Report Data</Button>
-      <Dialog open={open} handler={handleOpen} className='' style={{minWidth:'70%'}}>
+
+    <Dialog
+        open={open}
+        handler={handleOpen}
+        animate={{
+          mount: { scale: 1, y: 0 },
+          unmount: { scale: 0.9, y: -100 },
+        }}
+      >
         <DialogHeader>Report Data</DialogHeader>
-        <DialogBody className="h-[38rem] overflow-y-scroll actual-receipt">
-        <div className="invoice w-full">
+        <div className='actual-receipt'>
+        <DialogBody>
+        <div className="invoice w-full px-6 ">
             <header className="clearfix invoiceheader">
                 <div id="logo">
-                <img  alt="Company Logo" />
+                <img src='/Logo/AX BLACK.png'  alt="Company Logo" />
                 </div>
                 <div id="company">
-                <h2 className="name">Company Name</h2>
-                <div>455 Foggy Heights, AZ 85004, US</div>
-                <div>(602) 519-0450</div>
+                <h2 className="name">ANEXO</h2>
+                <div>Kakkanchery, Kozhikode</div>
+                <div>(+91) 9895299091</div>
                 <div>
-                    <a href="mailto:company@example.com">company@example.com</a>
+                    <a href="mailto:anexo4969@example.com">anexo4969@example.com</a>
                 </div>
                 </div>
             </header>
@@ -52,102 +102,122 @@ export default function ReportData() {
                 <div id="details" className="clearfix">
                 <div id="client">
                     <div className="to">INVOICE TO:</div>
-                    <h2 className="name">John Doe</h2>
-                    <div className="address">796 Silver Harbour, TX 79273, US</div>
+                    <h2 className="name">{managerInfo.user.name}</h2>
+                    <div className="address">{managerInfo.user.mob}</div>
                     <div>
-                    <a href="mailto:john@example.com">john@example.com</a>
+                    <a href={`mailto:${managerInfo.user.email}`}>{managerInfo.user.email}</a>
                     </div>
                 </div>
                 <div id="invoice">
-                    <h1>INVOICE 3-2-1</h1>
-                    <div className="date">Date of Invoice: 01/06/2014</div>
-                    <div className="date">Due Date: 30/06/2014</div>
+                    <div className="date">Date of Invoice: {moment().format("YYYY-MM-DD")}</div>
                 </div>
                 </div>
-                <table border="0" cellSpacing="0" cellPadding="0">
-                <thead>
-                    <tr>
-                    <th className="no">#</th>
-                    <th className="desc">DESCRIPTION</th>
-                    <th className="unit">UNIT PRICE</th>
-                    <th className="qty">QUANTITY</th>
-                    <th className="total">TOTAL</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td className="no">01</td>
-                    <td className="desc">
-                        <h3>Website Design</h3>Creating a recognizable design solution
-                        based on the company's existing visual identity
-                    </td>
-                    <td className="unit">$40.00</td>
-                    <td className="qty">30</td>
-                    <td className="total">$1,200.00</td>
-                    </tr>
-                    <tr>
-                    <td className="no">02</td>
-                    <td className="desc">
-                        <h3>Website Development</h3>Developing a Content Management
-                        System-based Website
-                    </td>
-                    <td className="unit">$40.00</td>
-                    <td className="qty">80</td>
-                    <td className="total">$3,200.00</td>
-                    </tr>
-                    <tr>
-                    <td className="no">03</td>
-                    <td className="desc">
-                        <h3>Search Engines Optimization</h3>Optimize the site for search
-                        engines (SEO)
-                    </td>
-                    <td className="unit">$40.00</td>
-                    <td className="qty">20</td>
-                    <td className="total">$800.00</td>
-                    </tr>
-                </tbody>
-                <tfoot>
+     <Card className="h-full w-full">
+       <table className="w-full min-w-max table-auto text-left">
+         <thead>
+           <tr>
+             {TABLE_HEAD.map((head) => (
+               <th
+                 key={head}
+                 className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+               >
+                 <Typography
+                   variant="small"
+                   color="blue-gray"
+                   className="font-normal leading-none opacity-70"
+                 >
+                   {head}
+                 </Typography>
+               </th>
+             ))}
+           </tr>
+         </thead>
+         <tbody>
+         {data
+                    .filter(item => item.is_paid === 'paid')
+                    .map((item, index) =>  {
+             const isLast = index === data.length - 1;
+             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
+  
+             return (
+               <tr key={index}>
+                 <td className={classes}>
+                   <Typography
+                     variant="small"
+                     color="blue-gray"
+                     className="font-normal"
+                   >
+                     {item.event_name}
+                   </Typography>
+                 </td>
+                 <td className={classes}>
+                   <Typography
+                     variant="small"
+                     color="blue-gray"
+                     className="font-normal"
+                   >
+                     {item.date.map((isoDateString, index) => {
+                              const date = new Date(isoDateString);
+                              return (
+                                <div key={index}>
+                                  {date.toLocaleDateString()}
+                                  <br />
+                                </div>
+                              );
+                            })}
+                   </Typography>
+                 </td>
+                 <td className={classes}>
+                   <Typography
+                     variant="small"
+                     color="blue-gray"
+                     className="font-normal w-40"
+                   >{item.address}
+                   </Typography>
+                 </td>
+                 <td className={classes}>
+                   <Typography
+                     as="a"
+                     href="#"
+                     variant="small"
+                     color="blue-gray"
+                     className="font-medium"
+                   >
+                     {item.advance_amount}
+                   </Typography>
+                 </td>
+               </tr>
+             );
+           })}
+         </tbody>
                     <tr>
                     <td colSpan="2"></td>
-                    <td colSpan="2">SUBTOTAL</td>
-                    <td>$5,200.00</td>
+                    <td colSpan="1">TOTAL</td>
+                    <td>₹ {totalAdvanceAmount}</td>
                     </tr>
-                    <tr>
-                    <td colSpan="2"></td>
-                    <td colSpan="2">TAX 25%</td>
-                    <td>$1,300.00</td>
-                    </tr>
-                    <tr>
-                    <td colSpan="2"></td>
-                    <td colSpan="2">GRAND TOTAL</td>
-                    <td>$6,500.00</td>
-                    </tr>
-                </tfoot>
-                </table>
-                <div id="thanks">Thank you!</div>
+       </table>
+     </Card>
                 <div id="notices">
-                <div>NOTICE:</div>
                 <div className="notice">
-                    A finance charge of 1.5% will be made on unpaid balances after 30
-                    days.
+                    Thank You for choosing us.
                 </div>
                 </div>
             </main>
-            <footer className='invoicefooter'>
-                Invoice was created on a computer and is valid without the signature and
-                seal.
-            </footer>
-            </div>
+     </div>
         </DialogBody>
+        </div>
         <DialogFooter className="space-x-2">
           <Button variant="text" color="blue-gray" onClick={handleOpen}>
             cancel
           </Button>
           <Button variant="gradient" color="green" onClick={downloadPDF}>
-            confirm
+            Download
           </Button>
         </DialogFooter>
       </Dialog>
+        {/* </DialogBody>
+        
+      </Dialog> */}
     </div>
   );
 }
