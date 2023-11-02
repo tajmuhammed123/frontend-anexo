@@ -69,6 +69,7 @@ function LogIn() {
           toast(response.response.data.alert);
         }
         if (response.status) {
+          localStorage.setItem("userInfo", JSON.stringify(response.data));
           localStorage.setItem("token", response.token);
           navigate("/");
         }
