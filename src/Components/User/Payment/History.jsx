@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useEffect } from "react";
 import { useState } from "react";
 import { axiosUserInstance } from "../../../Constants/axios";
@@ -67,7 +67,7 @@ function History() {
               </tr>
             </thead>
             <tbody>
-              {data ? data.map((item, index) => (
+              {data ? data.map((item) => (
                 <tr key={item._id} className="even:bg-blue-gray-50/50">
                   <td className="p-4">
                     <Typography

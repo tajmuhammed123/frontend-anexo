@@ -1,12 +1,11 @@
-import { EditIcon } from "@chakra-ui/icons";
+
 import {
   Button,
   Card,
   CardHeader,
   Typography,
 } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { axiosUserInstance } from "../../../Constants/axios";
 import { useQuery } from "@tanstack/react-query";
@@ -15,7 +14,6 @@ import EditUser from "./Edit";
 
 export function Profile() {
   const [user, setUser] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const userData = localStorage.getItem("userInfo");
   const userInfo = JSON.parse(userData);
   const { isLoading, error } = useQuery(["userData"], async () => {
@@ -38,9 +36,6 @@ export function Profile() {
   });
   const navigate = useNavigate();
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
 
   return (
     <>

@@ -1,5 +1,5 @@
 import { Card, CardBody, Typography } from "@material-tailwind/react";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import Chart from "react-apexcharts";
 import Spinner from "../../../Spinner";
 import { axiosManagerInstance } from "../../../Constants/axios";
@@ -16,7 +16,7 @@ function DashBoard() {
   const managerData = localStorage.getItem("managerInfo");
   const managerInfo = JSON.parse(managerData);
 
-  const { isLoading, error } = useQuery({
+  const { isLoading } = useQuery({
     queryKey: ["dashboarddata"],
     queryFn: async () => {
       try {

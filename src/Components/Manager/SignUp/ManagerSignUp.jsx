@@ -1,23 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import {
   Input,
-  Checkbox,
   Button,
   Typography,
   CardBody,
-  Textarea,
-  TabPanel,
-  Tabs,
-  TabsHeader,
-  Tab,
-  TabsBody,
   CardFooter,
   CardHeader,
   Card,
-  alert,
 } from "@material-tailwind/react";
 import "./SignUp.css";
 

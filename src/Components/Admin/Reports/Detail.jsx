@@ -63,7 +63,7 @@ export function Detail() {
         <Button onClick={handleReject}>Block</Button>
       </div>
       <div className="flex justify-center">
-        {data.map((item, index) => (
+        {data.map((item) => (
           <>
             <Card className="mt-6 w-96 m-5">
               <CardBody>

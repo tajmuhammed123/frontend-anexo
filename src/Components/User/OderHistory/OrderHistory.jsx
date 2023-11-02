@@ -1,4 +1,3 @@
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import {
   Card,
   CardHeader,
@@ -6,9 +5,7 @@ import {
   CardBody,
   Chip,
   Tooltip,
-  Input,
   IconButton,
-  Button,
   CardFooter,
 } from "@material-tailwind/react";
 import { axiosUserInstance } from "../../../Constants/axios";

@@ -5,46 +5,17 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { subscriptionSuccess } from "../../../../actions/ManagerActions";
 
 function CehckOut({ method, price }) {
   const stripe = useStripe();
   const elements = useElements();
-  // const [clientSecret,setClientSecret]=useState(Secret)
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(null);
   const [isloading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
-  // useEffect(()=>{
-  //     if(!stripe){
-  //         return;
-  //     }
-
-  //     const clientSecret= new URLSearchParams(window.location.search).get("payment_intent_client_secret")
-  //     if(!clientSecret){
-  //         return;
-  //     }
-
-  //     stripe.retrievePaymentIntent(clientSecret).then(({paymentIntent})=>{
-  //         switch(paymentIntent.success){
-  //             case "succeeded":
-  //                 setMessage("Payment Succeeded!")
-  //                 break;
-  //             case "processing":
-  //                 setMessage("Your Payment processing.")
-  //                 break;
-  //             case "requires_payment_method":
-  //                 setMessage("Your payment failed, please try again.")
-  //                 break;
-  //             default:
-  //                 setMessage("Something went wrong")
-  //                 break;
-  //         }
-  //     })
-  // },[stripe])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -75,8 +46,6 @@ function CehckOut({ method, price }) {
     setIsLoading(false);
   };
 
-  const handleEmailChange = (event) => {
-  };
 
   const paymentElementOptions = {
     layouts: "tabs",

@@ -11,8 +11,7 @@ import {
 import React, { useState } from "react";
 import { updateProfile } from "../../../actions/UserActions";
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { ProfileUpdate } from "../../../Validation/validation";
 import { Edit } from "@mui/icons-material";
 import { useEffect } from "react";
@@ -23,7 +22,6 @@ function EditUser({ user }) {
   const queryClient = useQueryClient();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(!open);
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const userInfoString = localStorage.getItem("userInfo");
   const userInfo = JSON.parse(userInfoString);
@@ -42,7 +40,6 @@ function EditUser({ user }) {
     handleBlur,
     handleSubmit,
     handleChange,
-    setFieldValue,
   } = useFormik({
     initialValues: initialValues,
     validationSchema: ProfileUpdate,

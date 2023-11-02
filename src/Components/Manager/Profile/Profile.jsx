@@ -1,18 +1,10 @@
-import { EditIcon } from "@chakra-ui/icons";
+
 import {
   Card,
   CardHeader,
-  CardBody,
-  CardFooter,
   Typography,
-  Tooltip,
-  Avatar,
-  Button,
-  Badge,
 } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { EditImage } from "./EditImage";
 import { axiosManagerInstance } from "../../../Constants/axios";
@@ -23,7 +15,7 @@ export function Profile() {
   const [manager, setManager] = useState([]);
   const userData = localStorage.getItem("userInfo");
   const userInfo = JSON.parse(userData);
-  const { isLoading, error } = useQuery(["managerData"], async () => {
+  const { isLoading} = useQuery(["managerData"], async () => {
     try {
       const userData = localStorage.getItem("managerInfo");
       const userInfo = JSON.parse(userData);

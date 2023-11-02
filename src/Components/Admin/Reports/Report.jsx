@@ -15,7 +15,7 @@ import Spinner from "../../../Spinner";
 export function Report() {
   const [report, setReport] = useState([]);
   const navigate = useNavigate();
-  const { isLoading, error } = useQuery({
+  const { isLoading } = useQuery({
     queryKey: ["reportdata"],
     queryFn: async () => {
       try {

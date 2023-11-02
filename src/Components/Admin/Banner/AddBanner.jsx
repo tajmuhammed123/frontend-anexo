@@ -1,12 +1,10 @@
 import {
   Button,
   Card,
-  Checkbox,
   Input,
   Typography,
 } from "@material-tailwind/react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { BannnerUpdation } from "../../../Validation/validation";
 import { useFormik } from "formik";
 import { useNavigate, useParams } from "react-router-dom";
@@ -14,8 +12,6 @@ import { axiosAdminInstance } from "../../../Constants/axios";
 import { addBanner } from "../../../actions/AdminActions";
 
 function AddBanner() {
-  const queryClient = useQueryClient();
-  const [data, setData] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
   let initialValues = {
@@ -54,7 +50,6 @@ function AddBanner() {
         await addBanner(formData);
         navigate("/admin/bannerlist");
         resetForm();
-        //   queryClient.invalidateQueries("categorey");
       }
     },
   });

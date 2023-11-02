@@ -1,7 +1,5 @@
 
-import { PencilIcon } from "@heroicons/react/24/solid";
 import {
-  ArrowDownTrayIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
 import {
@@ -47,7 +45,7 @@ function Bookings() {
   useEffect(() => {
     console.log(data);
   }, [data]);
-  const { isLoading, error } = useQuery({
+  const { isLoading } = useQuery({
     queryKey: ["bookingdata"],
     queryFn: async () => {
       try {
@@ -88,7 +86,7 @@ function Bookings() {
 
   const TABLE_ROWS =
     data.length > 0
-      ? data.map((item, index) => ({
+      ? data.map((item) => ({
           img: item.user_id.profile_img,
           name: item.event_name,
           amount: "$2,500",

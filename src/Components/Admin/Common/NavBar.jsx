@@ -18,9 +18,6 @@ import { useNavigate } from "react-router-dom";
 import {
   UserCircleIcon,
   ChevronDownIcon,
-  Cog6ToothIcon,
-  InboxArrowDownIcon,
-  LifebuoyIcon,
   PowerIcon,
 } from "@heroicons/react/24/outline";
 import { useDispatch } from "react-redux";
@@ -48,18 +45,6 @@ function ProfileMenu() {
       label: `${adminInfo.user.name}`,
       icon: UserCircleIcon,
     },
-    // {
-    //   label: "Edit Profile",
-    //   icon: Cog6ToothIcon,
-    // },
-    // {
-    //   label: "Inbox",
-    //   icon: InboxArrowDownIcon,
-    // },
-    // {
-    //   label: "Help",
-    //   icon: LifebuoyIcon,
-    // },
     {
       label: "Sign Out",
       icon: PowerIcon,

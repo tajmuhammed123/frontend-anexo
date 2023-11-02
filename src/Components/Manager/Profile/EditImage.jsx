@@ -6,13 +6,11 @@ import {
   DialogBody,
   DialogFooter,
   Input,
-  Textarea,
   Typography,
   Avatar,
   Badge,
 } from "@material-tailwind/react";
 import { axiosManagerInstance } from "../../../Constants/axios";
-import { useQueryClient } from "@tanstack/react-query";
 import { useFormik } from "formik";
 import { ImageUpdate } from "../../../Validation/validation";
 import { Edit } from "@mui/icons-material";
@@ -22,7 +20,6 @@ export function EditImage({ id, img }) {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen(!open);
-  const queryclient = useQueryClient();
 
   const initialValues = {
     profile: "",
@@ -30,11 +27,7 @@ export function EditImage({ id, img }) {
 
   const {
     values,
-    errors,
-    touched,
-    handleBlur,
     handleSubmit,
-    handleChange,
     setFieldValue,
   } = useFormik({
     initialValues: initialValues,

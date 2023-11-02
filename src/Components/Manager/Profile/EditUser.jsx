@@ -5,21 +5,18 @@ import {
   DialogFooter,
   DialogHeader,
   Input,
-  Spinner,
   Typography,
 } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { Edit } from "@mui/icons-material";
 import { updateProfile } from "../../../actions/ManagerActions";
 import { ProfileUpdate } from "../../../Validation/validation";
 import { GenerateSuccess } from "../../../Validation/EventUpdation";
 
-function EditUser({ user }) {
+function EditUser() {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(!open);
   const [loading, setLoading] = useState(false);
@@ -37,7 +34,6 @@ function EditUser({ user }) {
     handleBlur,
     handleSubmit,
     handleChange,
-    setFieldValue,
   } = useFormik({
     initialValues: initialValues,
     validationSchema: ProfileUpdate,

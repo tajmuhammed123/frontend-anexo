@@ -6,25 +6,19 @@ import {
   DialogBody,
   DialogFooter,
   Input,
-  Textarea,
   Typography,
-  Checkbox,
 } from "@material-tailwind/react";
 import { EditIcon } from "@chakra-ui/icons";
 import { axiosManagerInstance } from "../../../Constants/axios";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useFormik } from "formik";
 import {
   BookingImageUpdate,
-  ImageUpdate,
 } from "../../../Validation/validation";
 import { GenerateSuccess } from "../../../Validation/EventUpdation";
 
 export function EditImages({ images }) {
-  const [data, setEventdata] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [img, setImg] = useState([]);
 
@@ -37,35 +31,13 @@ export function EditImages({ images }) {
   const queryclient = useQueryClient();
 
 
-  const handleImages = async (e) => {
-    try {
-      const selectedFiles = e.currentTarget.files;
-      const fileArray = Array.from(selectedFiles);
-      setImg(...fileArray);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  const handleDeleteImage = (index, event) => {
-    event.preventDefault();
-    const updatedImg = [...img];
-    updatedImg.splice(index, 1);
-    setImg(updatedImg);
-    console.log(img);
-  };
-
   const initialValues = {
     profile: [],
   };
 
   const {
     values,
-    errors,
-    touched,
-    handleBlur,
     handleSubmit,
-    handleChange,
     setFieldValue,
   } = useFormik({
     initialValues: initialValues,

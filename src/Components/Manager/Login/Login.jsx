@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import {
-  userLogin,
   forgotPassword,
   forgotPasswordVerify,
-  userGoogleLogin,
 } from "../../../actions/UserActions";
 import {
   Card,
@@ -19,7 +17,6 @@ import {
 } from "@material-tailwind/react";
 
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
 import { managerLogin } from "../../../actions/ManagerActions";
 
 function LogIn() {

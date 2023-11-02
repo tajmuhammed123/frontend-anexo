@@ -34,13 +34,6 @@ function EventData() {
     advance_amount: 0,
   });
 
-  // const GenerateError = (err) => {
-  //   toast.error(err, {
-  //     position: 'top-center',
-  //     theme: 'colored',
-  //     autoClose: 3000
-  //   });
-  // };
 
   const [data, setEventdata] = useState([]);
   const userInfoString = localStorage.getItem("managerInfo");
@@ -49,11 +42,11 @@ function EventData() {
 
   const [img, setImg] = useState([]);
   const [managerData, setManagerData] = useState([]);
-  const { isLoading, error } = useQuery({
+  const { isLoading } = useQuery({
     queryKey: ["eventdata"],
     queryFn: async () => {
       try {
-        const response = await axiosManagerInstance
+        await axiosManagerInstance
           .get(`/geteventdata/${userInfo.user._id}`)
           .then((res) => {
             setEventdata(res.data.eventData),
@@ -93,7 +86,6 @@ function EventData() {
   const handleImages = async (e) => {
     try {
       const selectedFiles = e.currentTarget.files;
-      const fileArray = Array.from(selectedFiles);
       img.push(...selectedFiles);
       setEventData({ ...eventdata, [e.target.name]: img });
     } catch (error) {

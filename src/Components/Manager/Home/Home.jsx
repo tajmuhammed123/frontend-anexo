@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { StickyNavbar } from "../Common/NavBar";
+import { useEffect, useState } from "react";
 import "./Home.css";
 import { useSelector } from "react-redux";
 import {
@@ -13,39 +12,22 @@ import {
 import { useNavigate } from "react-router-dom";
 import { ImageList, ImageListItem } from "@mui/material";
 import {
-  BarChart,
   CelebrationOutlined,
-  ChatBubble,
   EmojiEventsOutlined,
   FavoriteBorderOutlined,
   FestivalOutlined,
   GroupsOutlined,
-  Star,
 } from "@mui/icons-material";
-import { CakeIcon, PencilIcon } from "@heroicons/react/24/outline";
+import { CakeIcon } from "@heroicons/react/24/outline";
 import { UnAvailableDate } from "../Modals/UnAvailableDate";
 import { axiosManagerInstance } from "../../../Constants/axios";
 import { useQuery } from "@tanstack/react-query";
-import { EditIcon } from "@chakra-ui/icons";
 import { EditAbout } from "./EditAbout";
 import { EditEvents } from "./EditEvents";
 import { EditImages } from "./EditImages";
 import Spinner from "../../../Spinner";
 
 function Home() {
-  // const { isLoading, error, data } = useQuery({
-  //   queryKey: ['ManagerDatas'],
-  //   queryFn: () => {
-  //     // Set the userId in the request headers
-  //     const headers = {
-  //       Authorization: `Bearer ${localStorage.getItem("managerInfo")}`,
-  //       userId: localStorage.getItem("userId"),
-  //     };
-
-  //     return  axiosManagerInstance.get("/manager/managerdata", { headers })
-  //       .then((res) => res.data);
-  //   },
-  // });
   function Star() {
     return (
       <svg
@@ -69,11 +51,10 @@ function Home() {
 
   useEffect(() => {
     console.log(manager);
-    const eventlist = userdata.events;
     console.log(userdata);
   }, [userdata, manager]);
 
-  const { isLoading, error } = useQuery({
+  const { isLoading, } = useQuery({
     queryKey: ["managerdata"],
     queryFn: async () => {
       try {

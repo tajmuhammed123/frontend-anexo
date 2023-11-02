@@ -1,14 +1,13 @@
 import {
   Card,
   Input,
-  Checkbox,
   Button,
   Typography,
   Spinner,
 } from "@material-tailwind/react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ProfileUpdate } from "../../../Validation/validation";
 import { updateProfile } from "../../../actions/UserActions";
 import { Updated } from "./Updated";
@@ -32,7 +31,6 @@ export function EditUser() {
     handleBlur,
     handleSubmit,
     handleChange,
-    setFieldValue,
   } = useFormik({
     initialValues: initialValues,
     validationSchema: ProfileUpdate,

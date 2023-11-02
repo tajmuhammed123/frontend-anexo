@@ -1,7 +1,6 @@
 import { useFormik } from "formik";
 import { CategoreySchema } from "../../../Validation/validation";
 import { Button, Card, Input, Typography } from "@material-tailwind/react";
-import React from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { addEventCategorey } from "../../../actions/AdminActions";
 

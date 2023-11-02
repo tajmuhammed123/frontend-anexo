@@ -11,7 +11,6 @@ import {
   DialogFooter,
   DialogBody,
   Input,
-  DialogHeader,
   Dialog,
   Chip,
 } from "@material-tailwind/react";
@@ -34,7 +33,7 @@ export function BookedUser() {
   const [data, setData] = useState([]);
   const userId = data.user_id;
   const queryClient = useQueryClient();
-  const { isLoading, error } = useQuery({
+  const { isLoading } = useQuery({
     queryKey: ["bookingdata"],
     queryFn: async () => {
       try {

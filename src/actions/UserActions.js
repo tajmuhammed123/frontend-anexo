@@ -35,7 +35,6 @@ export const userReg= (name, mob, email, password)=>async(dispatch)=>{
             { name, mob, email, password },
             config
           );
-          localStorage.setItem("userInfo", JSON.stringify(data));
           dispatch({
             type: USER_REGISTER_SUCCESS,
             payload: data,
@@ -290,7 +289,7 @@ export const paymentSuccess= async(id)=>{
             Authorization: `Bearer ${userInfo.token.token}`,
           },
         };
-        const { data } = await axiosUserInstance.post(
+        const { data } = await axiosUserInstance.get(
           `/paymentsuccess/${id}`,
           config
         );

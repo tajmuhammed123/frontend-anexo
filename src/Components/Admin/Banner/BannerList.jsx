@@ -7,7 +7,7 @@ import {
   ListItem,
   ListItemSuffix,
 } from "@material-tailwind/react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { axiosAdminInstance } from "../../../Constants/axios";
 import { useState } from "react";
@@ -15,8 +15,7 @@ import Spinner from "../../../Spinner";
 
 function BannerList() {
   const [banner, setBanner] = useState([]);
-  const queryClient = useQueryClient();
-  const { isLoading, error, data } = useQuery({
+  const { isLoading } = useQuery({
     queryKey: ["bannerlist"],
     queryFn: () =>
       axiosAdminInstance

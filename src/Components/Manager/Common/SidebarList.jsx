@@ -1,10 +1,8 @@
-import React from "react";
+
 import {
   List,
   ListItem,
   ListItemPrefix,
-  ListItemSuffix,
-  Chip,
 } from "@material-tailwind/react";
 import { useDispatch } from "react-redux";
 import { LogoutDetails } from "../../../actions/ManagerActions";

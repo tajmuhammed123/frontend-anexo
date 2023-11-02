@@ -16,28 +16,7 @@ import { useQuery } from "@tanstack/react-query";
 import CarouselComponent from "./CarouselComponent";
 import Spinner from "../../../Spinner";
 
-// function CheckIcon() {
-//   return (
-//     <svg
-//       xmlns="http://www.w3.org/2000/svg"
-//       fill="none"
-//       viewBox="0 0 24 24"
-//       strokeWidth={2}
-//       stroke="currentColor"
-//       className="h-3 w-3"
-//     >
-//       <path
-//         strokeLinecap="round"
-//         strokeLinejoin="round"
-//         d="M4.5 12.75l6 6 9-13.5"
-//       />
-//     </svg>
-//   );
-// }
-
 function Home() {
-  // const user = useSelector((state) => state.user);
-  // const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const homedata = async () => {
     try {
@@ -49,11 +28,11 @@ function Home() {
       console.log(error);
     }
   };
-  const { isLoading:isLoading1, error } = useQuery({
+  const { isLoading:isLoading1 } = useQuery({
     queryKey: ["homedata"],
     queryFn: () => {
       try {
-        const response = axiosUserInstance
+        axiosUserInstance
           .get("/homedata")
           .then((res) => setData(res.data.homeData));
       } catch (err) {
@@ -63,11 +42,11 @@ function Home() {
     },
   });
   const [events, setEventdata] = useState([]);
-  const { isLoading, error1 } = useQuery({
+  const { isLoading, } = useQuery({
     queryKey: ["eventdata"],
     queryFn: () => {
       try {
-        const response = axiosUserInstance
+        axiosUserInstance
           .get("/geteventdata")
           .then((res) => setEventdata(res.data.eventData));
       } catch (err) {

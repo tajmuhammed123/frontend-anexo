@@ -1,9 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { AdminNavbar } from "../Common/NavBar";
-import {
-  ArrowDownTrayIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/24/outline";
+import { useState } from "react";
 import {
   Card,
   CardHeader,
@@ -19,21 +14,20 @@ import {
 import { axiosAdminInstance } from "../../../Constants/axios";
 import { ManagerApprove, ManagerReject } from "../../../actions/AdminActions";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
 import Spinner from "../../../Spinner";
 
 function AdminHome() {
   const [managerData, setData] = useState([]);
 
   const [search, setSearch] = useState('');
-  const TABLE_ROWS = managerData.map((item, index) => ({
+  const TABLE_ROWS = managerData.map((item) => ({
     name: item.name,
     amount: item.eventData.salutation,
     status: item.is_authorized,
   }));
   const handleApprove = async (id) => {
     try {
-      const response = ManagerApprove(id);
+      ManagerApprove(id);
       queryClient.invalidateQueries("manager");
     } catch (error) {
       console.log(error.message);
@@ -41,7 +35,7 @@ function AdminHome() {
   };
   const handleReject = async (id) => {
     try {
-      const response = ManagerReject(id);
+      ManagerReject(id);
       queryClient.invalidateQueries("manager");
     } catch (error) {
       console.log(error.message);
@@ -83,17 +77,12 @@ function AdminHome() {
     }
   };
 
-  const { isLoading, error, data } = useQuery(["manager"], () => fetchData(1));
+  const { isLoading } = useQuery(["manager"], () => fetchData(1));
 
   if (isLoading) {
     return <Spinner />;
   }
 
-  // const managerdatas = managerData.filter((user) => {
-  //   const searchInputLower = searchInput.toLowerCase();
-  //   const nameMatch = user.name.toLowerCase().includes(searchInputLower);
-  //   return nameMatch;
-  // });
 
   const handleManangerSearch=async()=>{
     try {

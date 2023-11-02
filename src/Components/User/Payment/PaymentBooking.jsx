@@ -13,14 +13,6 @@ const PaymentBooking = () => {
   useEffect(() => {
     const request = async () => {
       try {
-        // const userData=localStorage.getItem('userInfo')
-        // const userInfo=JSON.parse(userData)
-        //     const config = {
-        //       headers: {
-        //         "Content-Type": "application/json",
-        //         Authorization: `Bearer ${userInfo.token.token}`,
-        //       },
-        //     };
         const res = await axiosUserInstance.get(`/paymentbookingdata/${id}`);
         setPrice(res.data.amount);
         setClientSecret(res.data.clientSecret);

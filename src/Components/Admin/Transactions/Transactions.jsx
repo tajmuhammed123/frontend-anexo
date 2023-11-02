@@ -6,7 +6,7 @@ import Spinner from "../../../Spinner";
 
 function UserData() {
   const [bookData, setBookData] = useState([]);
-  const { isLoading, error } = useQuery({
+  const { isLoading } = useQuery({
     queryKey: ["booking"],
     queryFn: async () => {
       try {

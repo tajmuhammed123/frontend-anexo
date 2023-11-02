@@ -18,9 +18,7 @@ import { useNavigate } from "react-router-dom";
 import {
   UserCircleIcon,
   ChevronDownIcon,
-  Cog6ToothIcon,
   InboxArrowDownIcon,
-  LifebuoyIcon,
   PowerIcon,
 } from "@heroicons/react/24/outline";
 import { useDispatch } from "react-redux";
@@ -52,11 +50,6 @@ function ProfileMenu() {
         navigate("/manager/profile");
       },
     },
-    // {
-    //   label: "Edit Profile",
-    //   icon: Cog6ToothIcon,
-
-    // },
     {
       label: "Inbox",
       icon: InboxArrowDownIcon,
@@ -64,10 +57,6 @@ function ProfileMenu() {
         navigate("/manager/chat");
       },
     },
-    // {
-    //   label: "Help",
-    //   icon: LifebuoyIcon,
-    // },
     {
       label: "Sign Out",
       icon: PowerIcon,
@@ -180,26 +169,6 @@ export function StickyNavbar() {
           onClick={() => navigate("/manager/chat")}
         />
       </Typography>
-      {/* <Typography
-      as="li"
-      variant="small"
-      color="blue-gray"
-      className="p-1 font-normal"
-    >
-      <a href="#" className="flex items-center">
-        Blocks
-      </a>
-    </Typography>
-    <Typography
-      as="li"
-      variant="small"
-      color="blue-gray"
-      className="p-1 font-normal"
-    >
-      <a href="#" className="flex items-center">
-        Docs
-      </a>
-    </Typography> */}
     </ul>
   );
   const [open, setOpen] = React.useState(false);

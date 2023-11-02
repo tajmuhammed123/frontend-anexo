@@ -6,7 +6,6 @@ import {
   DialogBody,
   DialogFooter,
   Input,
-  Textarea,
   Typography,
 } from "@material-tailwind/react";
 import { EditIcon } from "@chakra-ui/icons";
@@ -14,7 +13,6 @@ import { axiosManagerInstance } from "../../../Constants/axios";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import {
-  GenerateError,
   GenerateSuccess,
 } from "../../../Validation/EventUpdation";
 import { ToastContainer } from "react-toastify";

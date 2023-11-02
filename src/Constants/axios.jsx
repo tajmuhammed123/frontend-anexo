@@ -1,7 +1,6 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import NotificationDialog from "./DialogueAlert";
-import { Navigate } from "react-router-dom";
 
 export const axiosUserInstance = axios.create({
   baseURL: import.meta.env.VITE_USER_ROUTE,

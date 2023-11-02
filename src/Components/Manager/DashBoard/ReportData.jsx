@@ -22,7 +22,7 @@ export default function ReportData({chartData,booking, managerInfo}) {
  
   const handleOpen = () => setOpen(!open);
 
-  const { isLoading, error } = useQuery({
+  const { isLoading } = useQuery({
     queryKey: ["reportdata"],
     queryFn: async () => {
       try {

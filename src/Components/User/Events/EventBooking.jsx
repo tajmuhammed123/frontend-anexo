@@ -16,7 +16,6 @@ import { axiosUserInstance } from "../../../Constants/axios";
 import { EventSubmit } from "../../../actions/UserActions";
 import "react-calendar/dist/Calendar.css";
 import moment from "moment";
-import Payment from "./Payment/Payment";
 import Calendar from "react-calendar";
 import { GenerateSuccess } from "../../../Validation/EventUpdation";
 

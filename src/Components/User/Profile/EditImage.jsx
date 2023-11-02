@@ -33,11 +33,7 @@ export function EditImage({ id, img }) {
 
   const {
     values,
-    errors,
-    touched,
-    handleBlur,
     handleSubmit,
-    handleChange,
     setFieldValue,
   } = useFormik({
     initialValues: initialValues,

@@ -1,12 +1,8 @@
-import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { axiosAdminInstance } from "../../../Constants/axios";
 import { useState } from "react";
 import Spinner from "../../../Spinner";
 import { GenerateSuccess } from "../../../Validation/EventUpdation";
-import {
-  ArrowDownTrayIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/24/outline";
 import {
   Card,
   CardHeader,
@@ -23,7 +19,7 @@ export default function UserData() {
   const [search, setSearch] = useState("");
 
   const queryClient = useQueryClient();
-  const { isLoading: isLoading1, error: error1 } = useQuery({
+  const { isLoading: isLoading1, } = useQuery({
     queryKey: ["userdata"],
     queryFn: async () => {
       try {
@@ -35,7 +31,7 @@ export default function UserData() {
             Authorization: `Bearer ${userInfo.token.token}`,
           },
         };
-        const response = await axiosAdminInstance
+        await axiosAdminInstance
           .get("/getuserdata/1", config)
           .then((res) => {
             setUserData(res.data.data)

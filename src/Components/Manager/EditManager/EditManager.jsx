@@ -1,15 +1,12 @@
 import {
   Card,
   Input,
-  Checkbox,
   Button,
   Typography,
 } from "@material-tailwind/react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
 import { ProfileUpdate } from "../../../Validation/validation";
-import { Updated } from "./Updated";
 import { useNavigate } from "react-router-dom";
 import { updateProfile } from "../../../actions/ManagerActions";
 
@@ -32,7 +29,6 @@ export function EditManager() {
     handleBlur,
     handleSubmit,
     handleChange,
-    setFieldValue,
   } = useFormik({
     initialValues: initialValues,
     validationSchema: ProfileUpdate,
@@ -73,12 +69,6 @@ export function EditManager() {
               onBlur={handleBlur}
               value={values.name}
             />
-            {/* <Input size="lg" name="email" label="Email" onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email} />
-                {touched.email && errors.email && (
-            <div className="text-red-500 text-sm ">{errors.email}</div>
-          )} */}
             <Input
               size="lg"
               name="mob"

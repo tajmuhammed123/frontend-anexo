@@ -5,8 +5,6 @@ import {
   DialogHeader,
   DialogBody,
   DialogFooter,
-  Input,
-  Textarea,
   Typography,
   Checkbox,
 } from "@material-tailwind/react";
