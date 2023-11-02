@@ -65,6 +65,9 @@ function LogIn() {
         setLoading(true);
         const response = await dispatch(userLogin(email, password));
         setLoading(false);
+        if(response.data){
+          toast(response.data.alert)
+        }
         if (response.response) {
           toast(response.response.data.alert);
         }
